@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SawI — Productor Musical</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Familjen+Grotesk:wght@400;600;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#060606;--off:#0e0e0e;--surface:#141414;--surface2:#1b1b1b;
+  --border:rgba(255,255,255,0.07);--white:#f4efe6;--gold:#c8a97e;
+  --red:#e63946;--muted:rgba(244,239,230,0.38);
+  --fd:'Bebas Neue',sans-serif;--fb:'Familjen Grotesk',sans-serif;--fm:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:var(--fb);overflow-x:hidden;}
+
+#cur{width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;mix-blend-mode:difference;}
+#cur-ring{width:32px;height:32px;border:1px solid var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transition:all .07s ease;opacity:.4;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.3rem 4rem;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(6,6,6,.97) 0%,transparent 100%);}
+.nav-logo{font-family:var(--fd);font-size:2rem;letter-spacing:.15em;color:var(--white);text-decoration:none;}
+.nav-logo em{color:var(--gold);font-style:normal;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-family:var(--fm);font-size:.69rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{background:var(--gold)!important;color:var(--black)!important;padding:.5rem 1.2rem!important;}
+.nav-cta:hover{background:var(--white)!important;}
+
+/* HERO */
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 4rem 4rem;overflow:hidden;}
+.hero-video-wrap{position:absolute;inset:0;z-index:0;}
+.hero-video-wrap video{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.1) brightness(.4);}
+.hero-video-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,6,.97) 0%,rgba(6,6,6,.2) 60%,rgba(6,6,6,.12) 100%);}
+.hero-grain{position:absolute;inset:0;z-index:1;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.hero-content{position:relative;z-index:2;}
+.hero-tag{font-family:var(--fm);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;opacity:0;animation:fadeUp .7s .2s ease forwards;}
+.hero-tag::before{content:'';display:inline-block;width:28px;height:1px;background:var(--gold);}
+.hero-title{font-family:var(--fd);font-size:clamp(4rem,12vw,12rem);line-height:.86;letter-spacing:-.01em;opacity:0;animation:fadeUp .7s .3s ease forwards;}
+.hero-title .outline{color:transparent;-webkit-text-stroke:1px var(--gold);display:block;padding-left:4vw;}
+.hero-sub{max-width:460px;font-size:1rem;color:var(--muted);line-height:1.75;margin-top:1.5rem;opacity:0;animation:fadeUp .7s .4s ease forwards;}
+.hero-btns{display:flex;gap:1.1rem;margin-top:2rem;opacity:0;animation:fadeUp .7s .5s ease forwards;}
+.proof-bar{position:relative;z-index:2;display:flex;gap:2.5rem;margin-top:2.2rem;padding-top:1.6rem;border-top:1px solid var(--border);opacity:0;animation:fadeIn 1s .9s ease forwards;flex-wrap:wrap;}
+.proof-num{font-family:var(--fd);font-size:2.2rem;color:var(--gold);line-height:1;}
+.proof-label{font-family:var(--fm);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.15rem;}
+.scroll-hint{position:absolute;right:4rem;bottom:4rem;z-index:2;display:flex;flex-direction:column;align-items:center;gap:.4rem;font-family:var(--fm);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);animation:fadeIn 1.5s 1.2s ease forwards;opacity:0;}
+.scroll-line{width:1px;height:45px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollAnim 1.5s infinite;}
+
+.marquee-wrap{padding:1.1rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;background:var(--off);}
+.marquee-inner{display:flex;gap:3rem;animation:marquee 18s linear infinite;white-space:nowrap;}
+.m-item{font-family:var(--fd);font-size:.9rem;letter-spacing:.2em;color:var(--muted);flex-shrink:0;display:flex;align-items:center;gap:3rem;}
+.m-dot{color:var(--gold);}
+
+#video-horizontal{width:100%;overflow:hidden;position:relative;line-height:0;}
+#video-horizontal video{width:100%;display:block;object-fit:cover;max-height:480px;filter:grayscale(100%) contrast(1.1) brightness(.52);}
+#video-horizontal::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(6,6,6,.6) 0%,transparent 35%,transparent 65%,rgba(6,6,6,.6) 100%);pointer-events:none;}
+
+section{padding:7rem 4rem;}
+.sec-label{font-family:var(--fm);font-size:.63rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem;}
+.sec-label::before{content:'';display:inline-block;width:18px;height:1px;background:var(--gold);}
+.sec-title{font-family:var(--fd);font-size:clamp(2.6rem,5.5vw,4.8rem);line-height:.9;letter-spacing:.02em;}
+
+.btn-p{font-family:var(--fm);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:.88rem 2rem;border:none;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;position:relative;overflow:hidden;}
+.btn-p::after{content:'';position:absolute;inset:0;background:var(--white);transform:translateX(-101%);transition:transform .25s ease;}
+.btn-p:hover::after{transform:translateX(0);}
+.btn-p span{position:relative;z-index:1;color:var(--black);}
+.btn-g{font-family:var(--fm);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:.88rem 2rem;text-decoration:none;display:inline-block;transition:all .25s;}
+.btn-g:hover{color:var(--white);border-color:rgba(255,255,255,.3);}
+
+/* ABOUT */
+#about{background:var(--off);}
+.about-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:center;margin-top:4rem;}
+.about-visual{position:relative;}
+.about-main-img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(100%) contrast(1.08);display:block;}
+.about-tag{position:absolute;top:1.2rem;left:1.2rem;background:var(--gold);color:var(--black);font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .65rem;z-index:1;}
+.about-video-strip{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px;}
+.about-strip-item{position:relative;aspect-ratio:16/9;overflow:hidden;}
+.about-strip-item img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) brightness(.65);display:block;transition:filter .3s;}
+.about-strip-item:hover img{filter:grayscale(70%) brightness(.8);}
+.about-strip-overlay{position:absolute;inset:0;background:rgba(6,6,6,.25);}
+.about-bio{font-size:1rem;color:var(--muted);line-height:1.82;margin:1.5rem 0;}
+.about-bio strong{color:var(--white);}
+.genres{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.3rem 0;}
+.g-tag{font-family:var(--fm);font-size:.59rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--border);padding:.28rem .75rem;color:var(--muted);transition:all .2s;cursor:default;}
+.g-tag:hover{border-color:var(--gold);color:var(--gold);}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:2rem;}
+.stat{background:var(--surface);padding:1.4rem 1rem;text-align:center;}
+.stat-n{font-family:var(--fd);font-size:2.2rem;color:var(--gold);line-height:1;}
+.stat-l{font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.22rem;}
+
+/* EBOOKS */
+#ebooks{background:var(--black);}
+.ebooks-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;gap:2rem;}
+.ebooks-header p{max-width:380px;font-size:.9rem;color:var(--muted);line-height:1.7;}
+.ebooks-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.ebook-card{background:var(--surface);overflow:hidden;transition:background .3s;cursor:pointer;}
+.ebook-card:hover{background:var(--surface2);}
+.ebook-img-wrap{position:relative;overflow:hidden;aspect-ratio:1;}
+.ebook-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s;display:block;}
+.ebook-card:hover .ebook-img-wrap img{transform:scale(1.04);}
+.ebook-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,6,.88) 0%,rgba(6,6,6,.02) 55%);}
+.ebook-badge{position:absolute;top:.8rem;right:.8rem;background:var(--red);color:var(--white);font-family:var(--fm);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .6rem;}
+.ebook-body{padding:1.6rem 1.8rem 2rem;}
+.ebook-num{font-family:var(--fm);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.45rem;}
+.ebook-title{font-family:var(--fd);font-size:1.7rem;letter-spacing:.04em;line-height:1;margin-bottom:.6rem;}
+.ebook-desc{font-size:.82rem;color:var(--muted);line-height:1.62;margin-bottom:1.3rem;}
+/* Download button — opens modal/register */
+.ebook-dl-btn{font-family:var(--fm);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:.62rem 1.3rem;border:none;cursor:pointer;transition:background .2s;display:inline-block;width:100%;text-align:center;}
+.ebook-dl-btn:hover{background:var(--white);}
+.ebooks-urgency{margin-top:1.8rem;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red);padding:1.3rem 1.8rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap;}
+.urgency-text{font-size:.84rem;color:var(--muted);}
+.urgency-text strong{color:var(--white);display:block;margin-bottom:.2rem;}
+
+/* EBOOK REGISTER MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(6,6,6,.92);align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:var(--surface);border:1px solid var(--border);padding:2.5rem;max-width:420px;width:90%;position:relative;}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);font-family:var(--fm);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:color .2s;}
+.modal-close:hover{color:var(--white);}
+.modal-title{font-family:var(--fd);font-size:1.8rem;margin-bottom:.3rem;}
+.modal-sub{font-family:var(--fm);font-size:.62rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.8rem;}
+.modal-field{margin-bottom:1rem;}
+.modal-field label{display:block;font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;}
+.modal-field input{width:100%;background:var(--off);border:1px solid var(--border);padding:.78rem 1rem;color:var(--white);font-family:var(--fb);font-size:.86rem;outline:none;transition:border-color .2s;}
+.modal-field input:focus{border-color:var(--gold);}
+.modal-submit{width:100%;background:var(--gold);color:var(--black);border:none;padding:.9rem;font-family:var(--fm);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-top:.5rem;}
+.modal-submit:hover{background:var(--white);}
+.modal-note{font-family:var(--fm);font-size:.58rem;color:var(--muted);letter-spacing:.07em;margin-top:.8rem;text-align:center;}
+.modal-success{display:none;text-align:center;padding:1rem 0;}
+.modal-success.show{display:block;}
+.modal-success-icon{font-size:2.5rem;margin-bottom:.8rem;}
+.modal-success-title{font-family:var(--fd);font-size:2rem;margin-bottom:.5rem;}
+.modal-success-desc{font-size:.88rem;color:var(--muted);line-height:1.7;}
+
+/* VIDEO BREAKS */
+.video-break{padding:0;position:relative;overflow:hidden;line-height:0;}
+.video-break video{width:100%;display:block;object-fit:cover;max-height:520px;filter:grayscale(100%) contrast(1.1) brightness(.5);}
+.video-break-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(6,6,6,.42);}
+.vb-text{font-family:var(--fd);font-size:clamp(3rem,8vw,8rem);text-align:center;line-height:.88;letter-spacing:.05em;}
+.vb-text em{color:var(--gold);font-style:normal;display:block;}
+
+/* BEATS */
+#beats{background:var(--off);}
+.beats-inner{border:1px solid var(--border);background:var(--surface);position:relative;overflow:hidden;margin-top:3.5rem;}
+.beats-video-bg{position:absolute;inset:0;}
+.beats-video-bg video{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) brightness(.18);opacity:.7;}
+.beats-video-bg::after{content:'';position:absolute;inset:0;background:rgba(6,6,6,.72);}
+.beats-content{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:4rem;}
+.beats-left h3{font-family:var(--fd);font-size:3rem;line-height:.9;margin-bottom:1.1rem;}
+.beats-left p{font-size:.88rem;color:var(--muted);line-height:1.75;margin-bottom:1.8rem;}
+/* Beatstars CTA — reddish, eye-catching */
+.btn-beats{font-family:var(--fm);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:var(--white);padding:.9rem 2rem;border:1px solid var(--red);text-decoration:none;display:inline-block;position:relative;overflow:hidden;transition:color .3s;}
+.btn-beats::before{content:'';position:absolute;inset:0;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .28s ease;z-index:0;}
+.btn-beats:hover::before{transform:scaleX(1);}
+.btn-beats span{position:relative;z-index:1;}
+.beats-genres{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.b-genre{background:rgba(20,20,20,.85);padding:1rem;text-align:center;transition:all .2s;}
+.b-genre:hover{background:rgba(200,169,126,.07);}
+.b-genre-name{font-family:var(--fd);font-size:1.35rem;letter-spacing:.04em;display:block;}
+.b-genre-sub{font-family:var(--fm);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.18rem;display:block;}
+
+/* ── SERVICIOS — professional hover reveals ── */
+#servicios{background:var(--black);}
+.srv-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:.5rem;gap:2rem;}
+.srv-subtext{font-size:.86rem;color:var(--muted);max-width:340px;line-height:1.6;}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:2.8rem;}
+.srv-card{background:var(--surface);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:background .35s;cursor:default;}
+.srv-card:hover{background:var(--surface2);}
+/* Top accent line */
+.srv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .32s ease;transform-origin:left;}
+.srv-card:hover::before{transform:scaleX(1);}
+/* Service front */
+.srv-front{transition:opacity .28s ease,transform .28s ease;}
+.srv-card:hover .srv-front{opacity:0;transform:translateY(-12px);pointer-events:none;}
+/* Service back — includes list */
+.srv-back{position:absolute;inset:0;padding:2.2rem 2rem;background:var(--surface2);border-top:2px solid var(--gold);opacity:0;transform:translateY(12px);transition:opacity .28s ease,transform .28s ease;pointer-events:none;}
+.srv-card:hover .srv-back{opacity:1;transform:translateY(0);pointer-events:auto;}
+.srv-back-title{font-family:var(--fd);font-size:1.3rem;letter-spacing:.04em;margin-bottom:1rem;color:var(--gold);}
+.srv-back-list{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+.srv-back-list li{font-family:var(--fm);font-size:.66rem;letter-spacing:.08em;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;line-height:1.5;}
+.srv-back-list li::before{content:'—';color:var(--gold);flex-shrink:0;}
+.srv-back-cta{margin-top:1.5rem;}
+.srv-back-cta a{font-family:var(--fm);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:.62rem 1.4rem;text-decoration:none;display:inline-block;transition:background .2s;}
+.srv-back-cta a:hover{background:var(--white);}
+/* Front elements */
+.srv-name{font-family:var(--fd);font-size:1.65rem;line-height:1;letter-spacing:.04em;margin-bottom:.6rem;}
+.srv-desc{font-size:.81rem;color:var(--muted);line-height:1.62;margin-bottom:1.5rem;}
+.srv-price{font-family:var(--fd);font-size:2.5rem;color:var(--gold);line-height:1;}
+.srv-note{font-family:var(--fm);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.22rem;}
+.srv-hint{font-family:var(--fm);font-size:.58rem;letter-spacing:.08em;color:rgba(200,169,126,.45);margin-top:1.2rem;display:flex;align-items:center;gap:.4rem;}
+.srv-hint::before{content:'';display:inline-block;width:12px;height:1px;background:rgba(200,169,126,.45);}
+.srv-disclaimer{text-align:center;margin-top:1.5rem;font-family:var(--fm);font-size:.64rem;color:var(--muted);letter-spacing:.07em;}
+
+/* TESTIMONIOS */
+#testimonios{background:var(--off);}
+.testi-header{margin-bottom:3rem;}
+.testi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.testi-card{background:var(--surface);overflow:hidden;transition:background .3s;cursor:pointer;}
+.testi-card:hover{background:var(--surface2);}
+.testi-video-wrap{position:relative;aspect-ratio:9/16;overflow:hidden;}
+.testi-video-wrap img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%);display:block;transition:filter .3s,transform .4s;}
+.testi-card:hover .testi-video-wrap img{filter:grayscale(0%);transform:scale(1.03);}
+.testi-play-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(6,6,6,.32);transition:background .3s;}
+.testi-card:hover .testi-play-overlay{background:rgba(6,6,6,.12);}
+.testi-play-btn{width:50px;height:50px;border:1.5px solid var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;padding-left:3px;transition:all .25s;background:rgba(200,169,126,.12);}
+.testi-card:hover .testi-play-btn{background:var(--gold);border-color:var(--gold);color:var(--black);}
+.testi-body{padding:1.3rem 1.5rem 1.7rem;}
+.testi-quote{font-size:.82rem;color:var(--white);line-height:1.65;font-style:italic;margin-bottom:.85rem;}
+.testi-quote::before{content:'"';font-family:var(--fd);font-size:2.3rem;color:var(--gold);line-height:.4;display:block;margin-bottom:.4rem;}
+.testi-author{font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);}
+.testi-genre{font-family:var(--fm);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:.16rem;}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.93);align-items:center;justify-content:center;}
+.lightbox.open{display:flex;}
+.lightbox-inner{position:relative;max-width:380px;width:88%;}
+.lightbox-inner video{width:100%;border:1px solid var(--border);display:block;}
+.lightbox-close{position:absolute;top:-2.2rem;right:0;font-family:var(--fm);font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;border:none;background:none;transition:color .2s;}
+.lightbox-close:hover{color:var(--white);}
+
+/* NEWSLETTER */
+#newsletter{background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.nl-inner{max-width:640px;margin:0 auto;text-align:center;}
+.nl-inner .sec-label{justify-content:center;}
+.nl-inner .sec-label::before{display:none;}
+.nl-title{font-family:var(--fd);font-size:clamp(2.5rem,5vw,4rem);line-height:.9;margin:1rem 0;}
+.nl-sub{font-size:.94rem;color:var(--muted);line-height:1.75;margin:1.3rem 0 1rem;}
+.nl-perks{display:flex;gap:1.3rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;}
+.perk{font-family:var(--fm);font-size:.61rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:.35rem;}
+.perk::before{content:'✓';color:var(--gold);}
+.nl-form{display:flex;border:1px solid var(--border);max-width:420px;margin:0 auto;}
+.nl-form input{flex:1;background:var(--surface);border:none;padding:.88rem 1.2rem;color:var(--white);font-family:var(--fb);font-size:.87rem;outline:none;}
+.nl-form input::placeholder{color:var(--muted);}
+.nl-form button{background:var(--red);color:var(--white);border:none;padding:.88rem 1.4rem;font-family:var(--fm);font-size:.67rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s;white-space:nowrap;}
+.nl-form button:hover{background:var(--gold);color:var(--black);}
+.nl-note{font-family:var(--fm);font-size:.57rem;color:var(--muted);letter-spacing:.07em;margin-top:.75rem;}
+
+/* CONTACTO */
+#contacto{background:var(--off);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;margin-top:4rem;align-items:start;}
+.contact-left h3{font-family:var(--fd);font-size:2.1rem;line-height:1;margin-bottom:1rem;}
+.contact-left p{font-size:.88rem;color:var(--muted);line-height:1.8;margin-bottom:.8rem;}
+.social-links{display:flex;flex-direction:column;margin-top:1.3rem;}
+.s-link{display:flex;align-items:center;gap:1rem;font-family:var(--fm);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:.8rem 0;border-bottom:1px solid var(--border);transition:color .2s;}
+.s-link:hover{color:var(--gold);}
+.s-link-arr{margin-left:auto;}
+.qform{background:var(--surface);border:1px solid var(--border);padding:2.4rem;}
+.qform-title{font-family:var(--fd);font-size:1.65rem;margin-bottom:.22rem;}
+.qform-sub{font-family:var(--fm);font-size:.58rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem;}
+.prog{display:flex;gap:.3rem;margin-bottom:1.5rem;}
+.prog-dot{height:2px;flex:1;background:var(--border);transition:background .3s;}
+.prog-dot.done{background:var(--gold);}
+.qstep{display:none;}
+.qstep.active{display:block;}
+.qfield{margin-bottom:1.1rem;}
+.qfield label{display:block;font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.42rem;}
+.qfield input{width:100%;background:var(--off);border:1px solid var(--border);padding:.78rem 1rem;color:var(--white);font-family:var(--fb);font-size:.85rem;outline:none;transition:border-color .2s;}
+.qfield input:focus{border-color:var(--gold);}
+.radio-grp{display:flex;flex-direction:column;gap:.35rem;}
+.radio-opt{display:flex;align-items:center;gap:.75rem;padding:.65rem .9rem;border:1px solid var(--border);cursor:pointer;transition:all .2s;font-size:.82rem;color:var(--muted);user-select:none;}
+.radio-opt:hover{border-color:var(--gold);color:var(--white);}
+.radio-opt input[type=radio]{width:15px;height:15px;accent-color:var(--gold);cursor:pointer;flex-shrink:0;}
+.radio-opt.selected{border-color:var(--gold);color:var(--white);background:rgba(200,169,126,.05);}
+.qresult{display:none;text-align:center;padding:1.4rem 0;}
+.qresult.show{display:block;}
+.qresult-icon{font-size:2.4rem;margin-bottom:.6rem;}
+.qresult-title{font-family:var(--fd);font-size:1.9rem;margin-bottom:.6rem;}
+.qresult-desc{font-size:.84rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;}
+.wa-btn{display:inline-flex;align-items:center;gap:.7rem;background:#25d366;color:white;padding:.88rem 1.6rem;font-family:var(--fm);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:opacity .2s;}
+.wa-btn:hover{opacity:.85;}
+
+footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--off);display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.5rem;align-items:start;}
+.f-brand-name{font-family:var(--fd);font-size:2.5rem;letter-spacing:.1em;line-height:1;}
+.f-brand-name em{color:var(--gold);font-style:normal;}
+.f-brand p{font-size:.82rem;color:var(--muted);line-height:1.62;margin-top:.6rem;max-width:220px;}
+.f-links h4{font-family:var(--fm);font-size:.57rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.f-links ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.f-links a{font-size:.82rem;color:var(--muted);text-decoration:none;transition:color .2s;}
+.f-links a:hover{color:var(--white);}
+.f-bottom{grid-column:1/-1;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-family:var(--fm);font-size:.57rem;letter-spacing:.07em;color:var(--muted);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes scrollAnim{0%,100%{opacity:0;transform:scaleY(0);transform-origin:top;}50%{opacity:1;transform:scaleY(1);transform-origin:top;}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-d1{transition-delay:.1s;}
+.reveal-d2{transition-delay:.2s;}
+
+@media(max-width:1000px){
+  nav{padding:1rem 1.5rem;}.nav-links{display:none;}
+  #hero,section{padding:5rem 1.5rem;}
+  .about-layout,.beats-content,.contact-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .ebooks-grid,.srv-grid,.testi-grid{grid-template-columns:1fr;}
+  footer{grid-template-columns:1fr;padding:2.5rem 1.5rem;}
+  .scroll-hint,.proof-bar{display:none;}
+  .ebooks-header,.srv-header{flex-direction:column;gap:1rem;align-items:flex-start;}
+  .ebooks-urgency{flex-direction:column;gap:1rem;}
+  .srv-back{position:static;opacity:1;transform:none;display:none;}
+  .srv-card:hover .srv-front{opacity:1;transform:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div><div id="cur-ring"></div>
+
+<nav>
+  <a href="#" class="nav-logo">SAW<em>I</em></a>
+  <ul class="nav-links">
+    <li><a href="#about">Sobre mí</a></li>
+    <li><a href="#ebooks">Ebooks</a></li>
+    <li><a href="#beats">Beats</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
+    <li><a href="#newsletter">Newsletter</a></li>
+    <li><a href="#contacto" class="nav-cta">Trabajemos</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-video-wrap">
+    <video autoplay muted loop playsinline>
+      <source src="assets/videos/87c958dc46.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Productor Musical · España</div>
+    <h1 class="hero-title">EL SONIDO<span class="outline">QUE TE<br>FALTABA.</span></h1>
+    <p class="hero-sub">Pop, Reggaetón, Trap, R&amp;B, Indie Pop, Detroit.<br>Producción, mezcla, mastering y conocimiento para artistas que van en serio.</p>
+    <div class="hero-btns">
+      <a href="#servicios" class="btn-p"><span>Ver servicios →</span></a>
+      <a href="#ebooks" class="btn-g">Ebooks gratis</a>
+    </div>
+    <div class="proof-bar">
+      <div><div class="proof-num">+70</div><div class="proof-label">Artistas<br>trabajados</div></div>
+      <div><div class="proof-num">+5</div><div class="proof-label">Años<br>experiencia</div></div>
+      <div><div class="proof-num">+10K€</div><div class="proof-label">En equipo<br>profesional</div></div>
+      <div><div class="proof-num">100%</div><div class="proof-label">Dedicación<br>total</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div><span>scroll</span></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="m-item">Producción <span class="m-dot">·</span> Mixing <span class="m-dot">·</span> Mastering <span class="m-dot">·</span> Ebooks <span class="m-dot">·</span> Beats <span class="m-dot">·</span> Sample Packs <span class="m-dot">·</span> Cursos <span class="m-dot">·</span> Producción <span class="m-dot">·</span> Mixing <span class="m-dot">·</span> Mastering <span class="m-dot">·</span> Ebooks <span class="m-dot">·</span> Beats <span class="m-dot">·</span></span>
+    <span class="m-item">Producción <span class="m-dot">·</span> Mixing <span class="m-dot">·</span> Mastering <span class="m-dot">·</span> Ebooks <span class="m-dot">·</span> Beats <span class="m-dot">·</span> Sample Packs <span class="m-dot">·</span> Cursos <span class="m-dot">·</span> Producción <span class="m-dot">·</span> Mixing <span class="m-dot">·</span> Mastering <span class="m-dot">·</span> Ebooks <span class="m-dot">·</span> Beats <span class="m-dot">·</span></span>
+  </div>
+</div>
+
+<div id="video-horizontal">
+  <video autoplay muted loop playsinline>
+    <source src="assets/videos/1c054cc607.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- SOBRE MÍ -->
+<section id="about">
+  <div class="sec-label">Sobre mí</div>
+  <h2 class="sec-title reveal">EL HOMBRE<br>DETRÁS<br>DEL SONIDO.</h2>
+  <div class="about-layout">
+    <div class="about-visual reveal">
+      <div class="about-tag">@sawi_mr</div>
+      <img class="about-main-img" src="assets/images/74bcf3855b.jpg" alt="SawI productor">
+      <div class="about-video-strip">
+        <div class="about-strip-item"><img src="assets/images/e98aa84455.jpg" alt="SawI estudio" loading="lazy"><div class="about-strip-overlay"></div></div>
+        <div class="about-strip-item"><img src="assets/images/0961766839.jpg" alt="SawI produciendo" loading="lazy"><div class="about-strip-overlay"></div></div>
+      </div>
+    </div>
+    <div class="reveal reveal-d1">
+      <p class="about-bio">Soy <strong>Saúl</strong>, productor musical bajo el nombre artístico <strong>SawI</strong>. Llevo años construyendo sonidos para artistas independientes y emergentes que buscan sonar a industria sin pagar precios de industria.</p>
+      <p class="about-bio">Trabajo <strong>Pop, Reggaetón, Trap, R&amp;B, Indie Pop y Detroit</strong>. Desde la producción hasta la mezcla y masterización. Creo ebooks, beats y contenido para que otros productores aprendan lo que nadie enseña.</p>
+      <div class="genres">
+        <span class="g-tag">Pop</span><span class="g-tag">Reggaetón</span><span class="g-tag">Trap</span><span class="g-tag">R&amp;B</span><span class="g-tag">Indie Pop</span><span class="g-tag">Detroit</span>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-n">+70</div><div class="stat-l">Artistas<br>trabajados</div></div>
+        <div class="stat"><div class="stat-n">+5</div><div class="stat-l">Años<br>experiencia</div></div>
+        <div class="stat"><div class="stat-n">+10K€</div><div class="stat-l">Equipo<br>profesional</div></div>
+      </div>
+      <div style="margin-top:1.8rem;"><a href="#contacto" class="btn-p"><span>¿Tienes un proyecto? Hablemos →</span></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- EBOOKS -->
+<section id="ebooks">
+  <div class="ebooks-header">
+    <div>
+      <div class="sec-label">Conocimiento que convierte</div>
+      <h2 class="sec-title reveal">EBOOKS<br>GRATUITOS.</h2>
+    </div>
+    <p class="reveal reveal-d1">Recursos que normalmente cuestan dinero, gratis para ti. Crea tu cuenta y descarga. Los productores que los leen no vuelven a mezclar igual.</p>
+  </div>
+  <div class="ebooks-grid">
+    <div class="ebook-card reveal" onclick="openEbookModal('Mastering Sidechain')">
+      <div class="ebook-img-wrap"><img src="assets/images/2c0ed6352b.png" alt="Sidechain" loading="lazy"><div class="ebook-overlay"></div><div class="ebook-badge">GRATIS</div></div>
+      <div class="ebook-body">
+        <div class="ebook-num">Ebook 01 · Mezcla</div>
+        <div class="ebook-title">MASTERING<br>SIDECHAIN</div>
+        <p class="ebook-desc">Todo sobre el Sidechain. Kick &amp; Bass que se separan solos. Tu mezcla nunca volverá a sonar apelmazada.</p>
+        <button class="ebook-dl-btn" onclick="openEbookModal('Mastering Sidechain');event.stopPropagation();">Descargar gratis →</button>
+      </div>
+    </div>
+    <div class="ebook-card reveal reveal-d1" onclick="openEbookModal('Herramientas de Dinámica')">
+      <div class="ebook-img-wrap"><img src="assets/images/09dc84437c.png" alt="Herramientas de Dinámica" loading="lazy"><div class="ebook-overlay"></div><div class="ebook-badge">GRATIS</div></div>
+      <div class="ebook-body">
+        <div class="ebook-num">Ebook 02 · Dinámica</div>
+        <div class="ebook-title">HERRAMIENTAS<br>DE DINÁMICA</div>
+        <p class="ebook-desc">Compresor, Limitador y Clipper sin rodeos. La diferencia entre un beat amateur y uno de industria.</p>
+        <button class="ebook-dl-btn" onclick="openEbookModal('Herramientas de Dinámica');event.stopPropagation();">Descargar gratis →</button>
+      </div>
+    </div>
+    <div class="ebook-card reveal reveal-d2" onclick="openEbookModal('Dominio de la Voz')">
+      <div class="ebook-img-wrap"><img src="assets/images/3630864d97.png" alt="Dominio Voz" loading="lazy"><div class="ebook-overlay"></div><div class="ebook-badge">GRATIS</div></div>
+      <div class="ebook-body">
+        <div class="ebook-num">Ebook 03 · Voz</div>
+        <div class="ebook-title">DOMINIO<br>DE LA VOZ</div>
+        <p class="ebook-desc">10 ejercicios para mejorar tu canto. Técnicas reales para artistas que quieren sonar bien en estudio.</p>
+        <button class="ebook-dl-btn" onclick="openEbookModal('Dominio de la Voz');event.stopPropagation();">Descargar gratis →</button>
+      </div>
+    </div>
+  </div>
+  <div class="ebooks-urgency reveal">
+    <div class="urgency-text"><strong>¿Tienes el código del reel?</strong>Úsalo en el checkout y llévate los próximos ebooks de pago al 100% gratis. Sígueme en Instagram y TikTok.</div>
+    <a href="#newsletter" class="btn-p" style="background:var(--red);"><span>Suscribirme y acceder →</span></a>
+  </div>
+</section>
+
+<!-- EBOOK REGISTER MODAL -->
+<div class="modal-overlay" id="ebookModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeEbookModal()">✕ Cerrar</button>
+    <div id="modalForm">
+      <div class="modal-title">ACCESO<br>GRATUITO</div>
+      <div class="modal-sub" id="modalEbookName">Ebook · SawI</div>
+      <div class="modal-field"><label>Nombre artístico o nombre</label><input type="text" id="regName" placeholder="Tu nombre..."></div>
+      <div class="modal-field"><label>Email</label><input type="email" id="regEmail" placeholder="tu@email.com"></div>
+      <button class="modal-submit" id="regSubmit" onclick="submitRegister()">Crear cuenta y descargar →</button>
+      <p class="modal-note">Sin spam. Solo valor real. También recibirás la newsletter semanal.</p>
+      <p id="modalError" style="display:none;color:#e85a4f;font-family:var(--fm);font-size:.62rem;letter-spacing:.07em;margin-top:.6rem;text-align:center;"></p>
+    </div>
+    <div class="modal-success" id="modalSuccess">
+      <div class="modal-success-icon">✅</div>
+      <div class="modal-success-title">¡LISTO, <span id="successName"></span>!</div>
+      <p class="modal-success-desc">Te hemos guardado en la lista. En breve te llega un email con el ebook. Revisa la carpeta de <strong>Promociones</strong> o <strong>Spam</strong> si no lo ves.</p>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO BREAK 1 -->
+<div class="video-break">
+  <video autoplay muted loop playsinline>
+    <source src="assets/videos/a50df72009.mp4" type="video/mp4">
+  </video>
+  <div class="video-break-overlay"><div class="vb-text">EL SONIDO<em>NO MIENTE.</em></div></div>
+</div>
+
+<!-- BEATS -->
+<section id="beats">
+  <div class="sec-label">Beatstars</div>
+  <h2 class="sec-title reveal">BEATS<br>LISTOS.</h2>
+  <div class="beats-inner reveal">
+    <div class="beats-video-bg">
+      <video autoplay muted loop playsinline>
+        <source src="assets/videos/ef62be2457.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="beats-content">
+      <div class="beats-left">
+        <h3>TU PRÓXIMO<br>HIT EMPIEZA<br>AQUÍ.</h3>
+        <p>Beats exclusivos y no exclusivos en Beatstars. Si buscas algo custom hecho a medida, hablamos.</p>
+        <a href="https://sawiprods.beatstars.com/" target="_blank" rel="noopener" class="btn-beats"><span>Ver catálogo completo →</span></a>
+      </div>
+      <div class="beats-genres">
+        <div class="b-genre"><span class="b-genre-name">TRAP</span><span class="b-genre-sub">Dark · Hard</span></div>
+        <div class="b-genre"><span class="b-genre-name">POP</span><span class="b-genre-sub">Commercial</span></div>
+        <div class="b-genre"><span class="b-genre-name">R&amp;B</span><span class="b-genre-sub">Soul · Smooth</span></div>
+        <div class="b-genre"><span class="b-genre-name">RGT</span><span class="b-genre-sub">Reggaetón</span></div>
+        <div class="b-genre"><span class="b-genre-name">INDIE</span><span class="b-genre-sub">Alt Pop</span></div>
+        <div class="b-genre"><span class="b-genre-name">DET</span><span class="b-genre-sub">Detroit</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="srv-header reveal">
+    <div>
+      <div class="sec-label">Servicios profesionales</div>
+      <h2 class="sec-title">TRABAJEMOS<br>JUNTOS.</h2>
+    </div>
+    <p class="srv-subtext">Pasa el cursor por cada servicio para ver todo lo que incluye. Sin letra pequeña.</p>
+  </div>
+  <div class="srv-grid">
+
+    <!-- MIXING + MASTERING -->
+    <div class="srv-card reveal">
+      <div class="srv-front">
+        <div class="srv-name">MIXING +<br>MASTERING</div>
+        <p class="srv-desc">Tu canción al nivel de streaming. Mezcla profesional y masterización lista para distribuir.</p>
+        <div class="srv-price">100–130€</div>
+        <div class="srv-note">Precio base · consulta detalles</div>
+        <div class="srv-hint">Pasa el cursor para ver qué incluye</div>
+      </div>
+      <div class="srv-back">
+        <div class="srv-back-title">QUÉ INCLUYE</div>
+        <ul class="srv-back-list">
+          <li>Mezcla completa en Ableton Live 12</li>
+          <li>Masterización con plugins élite (Ozone, FabFilter, Waves)</li>
+          <li>Entrega en WAV + Stems separados</li>
+          <li>Calidad de audio premium 24bit / 48kHz</li>
+          <li>Revisiones ilimitadas hasta tu aprobación</li>
+          <li>Respuesta en menos de 24h</li>
+          <li>Contacto directo durante todo el proceso</li>
+          <li>Listo para Spotify, Apple Music, YouTube</li>
+        </ul>
+        <div class="srv-back-cta"><a href="#contacto">Solicitar →</a></div>
+      </div>
+    </div>
+
+    <!-- FULL PRODUCCIÓN -->
+    <div class="srv-card reveal reveal-d1">
+      <div class="srv-front">
+        <div class="srv-name">FULL<br>PRODUCCIÓN</div>
+        <p class="srv-desc">De la idea al master. Beat, arreglos, mezcla y mastering. Resultado listo para distribuir.</p>
+        <div class="srv-price">~220€</div>
+        <div class="srv-note">Precio base · según proyecto</div>
+        <div class="srv-hint">Pasa el cursor para ver qué incluye</div>
+      </div>
+      <div class="srv-back">
+        <div class="srv-back-title">QUÉ INCLUYE</div>
+        <ul class="srv-back-list">
+          <li>Beat original 100% exclusivo para ti</li>
+          <li>Producción completa en Ableton Live 12</li>
+          <li>Arreglos, melodías y estructura completa</li>
+          <li>Mezcla y masterización profesional</li>
+          <li>Entrega en WAV + Stems + Proyecto Ableton</li>
+          <li>Plugins élite: Serum, Kontakt, FabFilter, Waves</li>
+          <li>Revisiones ilimitadas durante el proceso</li>
+          <li>Respuesta en menos de 24h</li>
+          <li>Contacto directo en todo momento</li>
+          <li>Calidad de sonido de industria garantizada</li>
+        </ul>
+        <div class="srv-back-cta"><a href="#contacto">Solicitar →</a></div>
+      </div>
+    </div>
+
+    <!-- CUSTOM BEAT -->
+    <div class="srv-card reveal reveal-d2">
+      <div class="srv-front">
+        <div class="srv-name">CUSTOM<br>BEAT</div>
+        <p class="srv-desc">Beat hecho exclusivamente para tu proyecto. Con o sin licencia exclusiva.</p>
+        <div class="srv-price">120–150€</div>
+        <div class="srv-note">Sin licencia / Con licencia exclusiva</div>
+        <div class="srv-hint">Pasa el cursor para ver qué incluye</div>
+      </div>
+      <div class="srv-back">
+        <div class="srv-back-title">QUÉ INCLUYE</div>
+        <ul class="srv-back-list">
+          <li>Beat diseñado a medida para tu estilo</li>
+          <li>Producido en Ableton Live 12</li>
+          <li>BPM, key y referencia a tu elección</li>
+          <li>Entrega en WAV + MP3 + Stems</li>
+          <li>Opción de licencia exclusiva disponible</li>
+          <li>Plugins élite de síntesis y diseño de sonido</li>
+          <li>Revisiones hasta que sea exactamente lo que buscas</li>
+          <li>Respuesta en menos de 24h</li>
+          <li>Contacto directo durante todo el proceso</li>
+        </ul>
+        <div class="srv-back-cta"><a href="#contacto">Solicitar →</a></div>
+      </div>
+    </div>
+
+  </div>
+  <p class="srv-disclaimer reveal">¿Proyecto diferente? Los precios son orientativos. Cuéntame tu idea y presupuestamos sin compromiso.</p>
+</section>
+
+<!-- VIDEO BREAK 2 -->
+<div class="video-break">
+  <video autoplay muted loop playsinline>
+    <source src="assets/videos/8fab3700a4.mp4" type="video/mp4">
+  </video>
+  <div class="video-break-overlay"><div class="vb-text">+70 ARTISTAS<em>CONFÍAN EN MÍ.</em></div></div>
+</div>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="testi-header">
+    <div class="sec-label">Lo que dicen los artistas</div>
+    <h2 class="sec-title reveal">ELLOS YA<br>LO SABEN.</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal" onclick="openLightbox(0)">
+      <div class="testi-video-wrap">
+        <img src="assets/images/4faf360dcb.jpg" alt="bleaxh">
+        <div class="testi-play-overlay"><div class="testi-play-btn">▶</div></div>
+      </div>
+      <div class="testi-body">
+        <p class="testi-quote">Sabe lo que quiere otro artista de él en el estudio.</p>
+        <div class="testi-author">bleaxh</div>
+        <div class="testi-genre">Rock Alternativo</div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-d1" onclick="openLightbox(1)">
+      <div class="testi-video-wrap">
+        <img src="assets/images/0b96ab393f.jpg" alt="Ziplex">
+        <div class="testi-play-overlay"><div class="testi-play-btn">▶</div></div>
+      </div>
+      <div class="testi-body">
+        <p class="testi-quote">Me voy con un trato que no he tenido con ningún otro productor.</p>
+        <div class="testi-author">Ziplex</div>
+        <div class="testi-genre">Rap / Detroit</div>
+      </div>
+    </div>
+    <div class="testi-card reveal" onclick="openLightbox(2)">
+      <div class="testi-video-wrap">
+        <img src="assets/images/e0c709aeba.jpg" alt="SamuDr">
+        <div class="testi-play-overlay"><div class="testi-play-btn">▶</div></div>
+      </div>
+      <div class="testi-body">
+        <p class="testi-quote">Salí de allí con el sonido que quería.</p>
+        <div class="testi-author">SamuDr</div>
+        <div class="testi-genre">Batería · Covers</div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-d1" onclick="openLightbox(3)">
+      <div class="testi-video-wrap">
+        <img src="assets/images/ec364bdcd2.jpg" alt="Laura">
+        <div class="testi-play-overlay"><div class="testi-play-btn">▶</div></div>
+      </div>
+      <div class="testi-body">
+        <p class="testi-quote">Me dio la seguridad de cantar sin miedo.</p>
+        <div class="testi-author">Laura</div>
+        <div class="testi-genre">Experimental / Urbano</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕ Cerrar</button>
+    <video id="lbVideo" controls playsinline></video>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<section id="newsletter">
+  <div class="nl-inner reveal">
+    <div class="sec-label">Newsletter semanal</div>
+    <h2 class="nl-title">SABER MÁS.<br>GANAR MÁS.</h2>
+    <p class="nl-sub">Cada semana: herramientas reales, tendencias del sector y ofertas que no verás en redes. Tú primero, siempre.</p>
+    <div class="nl-perks">
+      <span class="perk">Ofertas exclusivas</span>
+      <span class="perk">Acceso anticipado</span>
+      <span class="perk">Contenido privado</span>
+      <span class="perk">Códigos de descuento</span>
+    </div>
+    <div class="nl-form">
+      <input type="email" id="nlEmail" placeholder="tu@email.com">
+      <button id="nlBtn" type="button">Quiero acceso</button>
+    </div>
+    <p class="nl-note" id="nlNote">Sin spam. Solo valor real. Cancela cuando quieras.</p>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="sec-label">¿Tienes un proyecto serio?</div>
+  <h2 class="sec-title reveal">HABLEMOS.</h2>
+  <div class="contact-grid">
+    <div class="reveal">
+      <h3>ANTES DE<br>ESCRIBIRME,<br>CUALIFÍCATE.</h3>
+      <p>No todo el mundo está listo para invertir en su proyecto. Rellena el formulario con honestidad — si encajamos, te doy mi contacto directo.</p>
+      <p style="font-size:.8rem;color:var(--muted);font-style:italic;">Los que pasan el filtro reciben respuesta en menos de 24h.</p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/sawi_mr" target="_blank" class="s-link"><span>Instagram</span><span>@sawi_mr</span><span class="s-link-arr">→</span></a>
+        <a href="https://www.tiktok.com/@sawi_mr" target="_blank" class="s-link"><span>TikTok</span><span>@sawi_mr</span><span class="s-link-arr">→</span></a>
+        <a href="https://sawiprods.beatstars.com/" target="_blank" class="s-link"><span>Beatstars</span><span>sawiprods</span><span class="s-link-arr">→</span></a>
+      </div>
+    </div>
+    <div class="qform reveal reveal-d1">
+      <div class="qform-title">FORMULARIO DE<br>CUALIFICACIÓN</div>
+      <div class="qform-sub">Selecciona tu opción · 3 pasos</div>
+      <div class="prog"><div class="prog-dot done" id="pd1"></div><div class="prog-dot" id="pd2"></div><div class="prog-dot" id="pd3"></div></div>
+      <div class="qstep active" id="qs1">
+        <div class="qfield"><label>Nombre artístico o nombre</label><input type="text" id="qname" placeholder="Tu nombre..."></div>
+        <div class="qfield"><label>¿Qué género musical haces?</label>
+          <div class="radio-grp">
+            <label class="radio-opt"><input type="radio" name="genre" value="reggaeton"> Reggaetón / Urbano</label>
+            <label class="radio-opt"><input type="radio" name="genre" value="trap"> Trap / Hip-Hop</label>
+            <label class="radio-opt"><input type="radio" name="genre" value="pop"> Pop</label>
+            <label class="radio-opt"><input type="radio" name="genre" value="rnb"> R&amp;B / Soul</label>
+            <label class="radio-opt"><input type="radio" name="genre" value="indie"> Indie / Alternativo</label>
+            <label class="radio-opt"><input type="radio" name="genre" value="otro"> Otro</label>
+          </div>
+        </div>
+        <button class="btn-p" onclick="qNext(1)" style="width:100%;text-align:center;margin-top:.5rem;"><span>Siguiente →</span></button>
+      </div>
+      <div class="qstep" id="qs2">
+        <div class="qfield"><label>¿Qué necesitas?</label>
+          <div class="radio-grp">
+            <label class="radio-opt"><input type="radio" name="srv" value="mixing"> Mixing + Mastering</label>
+            <label class="radio-opt"><input type="radio" name="srv" value="prod"> Full Producción completa</label>
+            <label class="radio-opt"><input type="radio" name="srv" value="beat"> Custom Beat exclusivo</label>
+            <label class="radio-opt"><input type="radio" name="srv" value="otro"> Otra cosa / No sé aún</label>
+          </div>
+        </div>
+        <button class="btn-p" onclick="qNext(2)" style="width:100%;text-align:center;margin-top:.5rem;"><span>Siguiente →</span></button>
+      </div>
+      <div class="qstep" id="qs3">
+        <div class="qfield"><label>¿Estado de tu proyecto?</label>
+          <div class="radio-grp">
+            <label class="radio-opt"><input type="radio" name="proyecto" value="listo"> Tengo canción lista para trabajar</label>
+            <label class="radio-opt"><input type="radio" name="proyecto" value="desarrollo"> En desarrollo, necesito ayuda</label>
+            <label class="radio-opt"><input type="radio" name="proyecto" value="idea"> Solo tengo una idea por ahora</label>
+          </div>
+        </div>
+        <div class="qfield"><label>¿Listo/a para invertir?</label>
+          <div class="radio-grp">
+            <label class="radio-opt"><input type="radio" name="inv" value="si"> Sí, estoy listo/a para invertir</label>
+            <label class="radio-opt"><input type="radio" name="inv" value="quizas"> Quizás, depende del presupuesto</label>
+            <label class="radio-opt"><input type="radio" name="inv" value="no"> Ahora mismo no tengo presupuesto</label>
+          </div>
+        </div>
+        <button class="btn-p" style="background:var(--red);width:100%;text-align:center;margin-top:.5rem;" onclick="qNext(3)"><span>Ver resultado →</span></button>
+      </div>
+      <div class="qstep" id="qs4">
+        <div class="qresult" id="rYes">
+          <div class="qresult-icon">✅</div>
+          <div class="qresult-title">ENCAJAMOS.</div>
+          <p class="qresult-desc">Tienes proyecto y estás listo para invertir. Escríbeme directamente por WhatsApp.</p>
+          <a href="https://wa.me/34652574960?text=Hola%20Sa%C3%BAl%2C%20he%20rellenado%20el%20formulario%20de%20cualificaci%C3%B3n%20en%20tu%20web." target="_blank" class="wa-btn">💬 Escríbeme por WhatsApp</a>
+        </div>
+        <div class="qresult" id="rNo">
+          <div class="qresult-icon">⏳</div>
+          <div class="qresult-title">AÚN NO ES<br>EL MOMENTO.</div>
+          <p class="qresult-desc">No pasa nada. Suscríbete, aprende con los ebooks y cuando estés listo, aquí estaré.</p>
+          <a href="#newsletter" class="btn-p"><span>Suscribirme gratis →</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-brand"><div class="f-brand-name">SAW<em>I</em></div><p>Productor musical en España. Sonido de industria para artistas que van en serio.</p></div>
+  <div class="f-links"><h4>Navegación</h4><ul>
+    <li><a href="#about">Sobre mí</a></li><li><a href="#ebooks">Ebooks</a></li>
+    <li><a href="#beats">Beats</a></li><li><a href="#servicios">Servicios</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
+    <li><a href="#newsletter">Newsletter</a></li><li><a href="#contacto">Contacto</a></li>
+  </ul></div>
+  <div class="f-links"><h4>Redes</h4><ul>
+    <li><a href="https://www.instagram.com/sawi_mr" target="_blank">Instagram @sawi_mr</a></li>
+    <li><a href="https://www.tiktok.com/@sawi_mr" target="_blank">TikTok @sawi_mr</a></li>
+    <li><a href="https://sawiprods.beatstars.com/" target="_blank">Beatstars</a></li>
+  </ul></div>
+  <div class="f-bottom"><span>© 2025 SawI. Todos los derechos reservados.</span><span>Hecho con intención.</span></div>
+</footer>
+
+<!-- Hidden testimony video sources -->
+<div style="display:none">
+  <video id="lbSrc0"><source src="assets/videos/3d3b18f516.mp4" type="video/mp4"></video>
+  <video id="lbSrc1"><source src="assets/videos/0f26c20e33.mp4" type="video/mp4"></video>
+  <video id="lbSrc2"><source src="assets/videos/c7f5cca9d6.mp4" type="video/mp4"></video>
+  <video id="lbSrc3"><source src="assets/videos/70b5286c1f.mp4" type="video/mp4"></video>
+</div>
+
+<script>
+// CURSOR
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function a(){
+  cur.style.left=mx-5+'px';cur.style.top=my-5+'px';
+  rx+=(mx-rx)*.09;ry+=(my-ry)*.09;
+  ring.style.left=rx-16+'px';ring.style.top=ry-16+'px';
+  requestAnimationFrame(a);
+})();
+
+// REVEAL
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// RADIO
+document.querySelectorAll('.radio-opt').forEach(opt=>{
+  opt.addEventListener('click',()=>{
+    opt.closest('.radio-grp').querySelectorAll('.radio-opt').forEach(o=>o.classList.remove('selected'));
+    opt.classList.add('selected');
+  });
+});
+
+// === BREVO BRIDGE ===
+// Llama al endpoint serverless /api/brevo-subscribe que es el unico que conoce la API key.
+async function brevoSubscribe(payload){
+  try{
+    const r = await fetch('/api/brevo-subscribe', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const data = await r.json().catch(()=>({ok:false,error:'Respuesta invalida.'}));
+    return data;
+  }catch(err){
+    return {ok:false, error:'No hemos podido conectar. Comprueba tu conexion.'};
+  }
+}
+
+// QUALIFY (formulario de cualificacion)
+async function qNext(from){
+  if(from===1){
+    if(!document.getElementById('qname').value.trim()){alert('Escribe tu nombre.');return;}
+    if(!document.querySelector('input[name="genre"]:checked')){alert('Selecciona tu genero.');return;}
+  }
+  if(from===2){if(!document.querySelector('input[name="srv"]:checked')){alert('Selecciona que necesitas.');return;}}
+  if(from===3){
+    const inv=document.querySelector('input[name="inv"]:checked');
+    if(!document.querySelector('input[name="proyecto"]:checked')){alert('Selecciona el estado de tu proyecto.');return;}
+    if(!inv){alert('Indica si estas listo.');return;}
+
+    // Recogemos las respuestas para mandarlas a Brevo
+    const nombre  = document.getElementById('qname').value.trim();
+    const genero  = (document.querySelector('input[name="genre"]:checked')||{}).value || '';
+    const servicio= (document.querySelector('input[name="srv"]:checked')||{}).value || '';
+    const proyecto= (document.querySelector('input[name="proyecto"]:checked')||{}).value || '';
+    const inversion = inv.value;
+
+    // Si el usuario ha puesto un email en el formulario lo mandamos. Si no, igualmente
+    // se queda como lead cualificado en Brevo cuando rellene su email mas tarde.
+    const emailField = document.getElementById('qemail');
+    const email = emailField ? emailField.value.trim() : '';
+    if(email){
+      brevoSubscribe({
+        email,
+        nombre,
+        origen: 'cualificacion',
+        cualificado: inversion === 'si',
+        detalles: { genero, servicio, proyecto, inversion }
+      });
+    }
+
+    document.getElementById('qs3').classList.remove('active');
+    document.getElementById('qs4').classList.add('active');
+    (inversion==='si'?document.getElementById('rYes'):document.getElementById('rNo')).classList.add('show');
+    return;
+  }
+  document.getElementById('qs'+from).classList.remove('active');
+  document.getElementById('qs'+(from+1)).classList.add('active');
+  document.getElementById('pd'+(from+1)).classList.add('done');
+}
+
+// EBOOK MODAL
+let currentEbook='';
+function openEbookModal(name){
+  currentEbook=name;
+  document.getElementById('modalEbookName').textContent='Ebook \u2014 '+name;
+  document.getElementById('modalForm').style.display='block';
+  document.getElementById('modalSuccess').classList.remove('show');
+  document.getElementById('regName').value='';
+  document.getElementById('regEmail').value='';
+  const err = document.getElementById('modalError');
+  if(err){err.style.display='none';err.textContent='';}
+  document.getElementById('ebookModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeEbookModal(){
+  document.getElementById('ebookModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('ebookModal').addEventListener('click',function(e){if(e.target===this)closeEbookModal();});
+
+async function submitRegister(){
+  const name=document.getElementById('regName').value.trim();
+  const email=document.getElementById('regEmail').value.trim();
+  const errEl = document.getElementById('modalError');
+  const btn = document.getElementById('regSubmit');
+  if(!name){errEl.style.display='block';errEl.textContent='Introduce tu nombre.';return;}
+  if(!email||!email.includes('@')){errEl.style.display='block';errEl.textContent='Introduce un email valido.';return;}
+  errEl.style.display='none';
+  if(btn){btn.disabled=true;btn.textContent='Enviando...';}
+
+  const res = await brevoSubscribe({
+    email, nombre: name, origen: 'ebook', ebook: currentEbook
+  });
+
+  if(btn){btn.disabled=false;btn.textContent='Crear cuenta y descargar';}
+
+  if(!res.ok){
+    errEl.style.display='block';
+    errEl.textContent = res.error || 'Algo ha fallado. Intentalo otra vez.';
+    return;
+  }
+
+  document.getElementById('successName').textContent = name.toUpperCase();
+  document.getElementById('modalForm').style.display='none';
+  document.getElementById('modalSuccess').classList.add('show');
+}
+
+// LIGHTBOX
+function openLightbox(i){
+  const src=document.getElementById('lbSrc'+i);
+  const vid=document.getElementById('lbVideo');
+  if(src){vid.src=src.querySelector('source').src;vid.load();vid.play();}
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+  const vid=document.getElementById('lbVideo');
+  vid.pause();vid.src='';
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLightbox();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLightbox();closeEbookModal();}});
+
+// NEWSLETTER
+document.getElementById('nlBtn').addEventListener('click',async function(){
+  const v=document.getElementById('nlEmail').value.trim();
+  const noteEl = document.getElementById('nlNote');
+  if(!v||!v.includes('@')){noteEl.textContent='Introduce un email valido.';noteEl.style.color='#e85a4f';return;}
+  const original = this.textContent;
+  this.textContent='Enviando...';
+  this.disabled=true;
+
+  const res = await brevoSubscribe({ email: v, origen: 'newsletter' });
+
+  this.disabled=false;
+  if(!res.ok){
+    this.textContent = original;
+    noteEl.textContent = res.error || 'No se ha podido guardar. Intentalo otra vez.';
+    noteEl.style.color = '#e85a4f';
+    return;
+  }
+  this.textContent='\u2713 \u00a1Bienvenido/a!';
+  this.style.background='#2a9d5c';
+  document.getElementById('nlEmail').value='';
+  noteEl.textContent='Email guardado. Pronto recibiras novedades. \ud83c\udf9b\ufe0f';
+  noteEl.style.color='';
+});
+
+document.querySelectorAll('video[autoplay]').forEach(v=>v.play().catch(()=>{}));
+</script>
+</body>
+</html>

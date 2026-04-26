@@ -1,0 +1,9 @@
+{
+  "name": "sawi-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web SawI - productor musical. HTML estatico + funcion serverless para Brevo.",
+  "engines": {
+    "node": ">=18"
+  }
+}
