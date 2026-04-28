@@ -2,8 +2,36 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SawI — Productor Musical</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2210%22%20fill%3D%22%23060606%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23c8a96a%22%20text-anchor%3D%22middle%22%3ES%3C%2Ftext%3E%3C%2Fsvg%3E">
+<meta name="description" content="SawI - Productor musical en Espana. Mixing, mastering, beats y produccion para Pop, Reggaeton, Trap, R&B e Indie Pop. El sonido que te faltaba.">
+<meta name="keywords" content="productor musical, mixing, mastering, beats, sawi, sawiprods, productor espana, beats trap, beats reggaeton, ebooks produccion musical">
+<meta name="author" content="SawI">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://sawiprods.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sawiprods.com/">
+<meta property="og:title" content="SawI | El sonido que te faltaba">
+<meta property="og:description" content="Productor musical en Espana. Mixing, mastering, beats y produccion al nivel que tu proyecto necesita.">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="SawI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SawI | El sonido que te faltaba">
+<meta name="twitter:description" content="Productor musical en Espana. Mixing, mastering y beats.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "name": "SawI",
+  "alternateName": "SawI Productor Musical",
+  "url": "https://sawiprods.com",
+  "genre": ["Pop","Reggaeton","Trap","R&B","Indie Pop"],
+  "areaServed": "ES",
+  "description": "Productor musical especializado en mixing, mastering y beats."
+}
+</script>
+
+<title>SawI | El sonido que te faltaba</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Familjen+Grotesk:wght@400;600;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -22,7 +50,7 @@ body{background:var(--black);color:var(--white);font-family:var(--fb);overflow-x
 
 nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.3rem 4rem;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(6,6,6,.97) 0%,transparent 100%);}
 .nav-logo{font-family:var(--fd);font-size:2rem;letter-spacing:.15em;color:var(--white);text-decoration:none;}
-.nav-logo em{color:var(--gold);font-style:normal;}
+.nav-logo em{color:var(--white);font-style:normal;}
 .nav-links{display:flex;gap:2rem;list-style:none;}
 .nav-links a{font-family:var(--fm);font-size:.69rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
 .nav-links a:hover{color:var(--gold);}
@@ -38,8 +66,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.3rem 4rem;display:
 .hero-content{position:relative;z-index:2;}
 .hero-tag{font-family:var(--fm);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;opacity:0;animation:fadeUp .7s .2s ease forwards;}
 .hero-tag::before{content:'';display:inline-block;width:28px;height:1px;background:var(--gold);}
-.hero-title{font-family:var(--fd);font-size:clamp(4rem,12vw,12rem);line-height:.86;letter-spacing:-.01em;opacity:0;animation:fadeUp .7s .3s ease forwards;}
-.hero-title .outline{color:transparent;-webkit-text-stroke:1px var(--gold);display:block;padding-left:4vw;}
+.hero-title{font-family:var(--fd);font-size:clamp(4rem,12vw,12rem);line-height:.86;letter-spacing:-.01em;opacity:0;animation:fadeUp .7s .3s ease forwards,heroBreathe 7s 1.5s ease-in-out infinite;text-shadow:0 1px 0 rgba(255,255,255,.04),0 2px 0 rgba(0,0,0,.18),0 4px 12px rgba(0,0,0,.28),0 12px 36px rgba(0,0,0,.45);transform-style:preserve-3d;will-change:transform;perspective:1200px;transition:transform .6s cubic-bezier(.2,.8,.2,1);}.hero-title:hover{transform:translateZ(8px);}@keyframes heroBreathe{0%,100%{transform:translateZ(0) scale(1) rotateX(0deg);}50%{transform:translateZ(6px) scale(1.004) rotateX(.4deg);}}
+.hero-title .outline{color:transparent;-webkit-text-stroke:1px var(--gold);display:block;padding-left:4vw;text-shadow:0 1px 0 rgba(200,169,106,.06),0 6px 18px rgba(0,0,0,.32),0 16px 40px rgba(0,0,0,.4);}
 .hero-sub{max-width:460px;font-size:1rem;color:var(--muted);line-height:1.75;margin-top:1.5rem;opacity:0;animation:fadeUp .7s .4s ease forwards;}
 .hero-btns{display:flex;gap:1.1rem;margin-top:2rem;opacity:0;animation:fadeUp .7s .5s ease forwards;}
 .proof-bar{position:relative;z-index:2;display:flex;gap:2.5rem;margin-top:2.2rem;padding-top:1.6rem;border-top:1px solid var(--border);opacity:0;animation:fadeIn 1s .9s ease forwards;flex-wrap:wrap;}
@@ -325,7 +353,7 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
 <section id="hero">
   <div class="hero-video-wrap">
     <video autoplay muted loop playsinline>
-      <source src="assets/videos/87c958dc46.mp4" type="video/mp4">
+      <source src="assets/videos/hero-bnw.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-grain"></div>
@@ -778,6 +806,23 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
 </div>
 
 <script>
+// HERO PARALLAX 3D sutil
+(function(){
+  const ht=document.querySelector('.hero-title');
+  if(!ht) return;
+  const hero=document.getElementById('hero');
+  if(!hero) return;
+  let active=true;
+  hero.addEventListener('mousemove',e=>{
+    if(!active) return;
+    const r=hero.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width-.5)*2;
+    const y=((e.clientY-r.top)/r.height-.5)*2;
+    ht.style.transform=`perspective(1200px) translateZ(8px) rotateY(${x*1.2}deg) rotateX(${-y*.8}deg)`;
+  });
+  hero.addEventListener('mouseleave',()=>{ht.style.transform='';});
+})();
+
 // CURSOR
 const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
 let mx=0,my=0,rx=0,ry=0;
