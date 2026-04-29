@@ -98,7 +98,7 @@ section{padding:7rem 4rem;}
 .btn-g:hover{color:var(--white);border-color:rgba(255,255,255,.3);}
 
 /* ABOUT */
-#about{background:var(--off);}
+
 .about-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:center;margin-top:4rem;}
 .about-visual{position:relative;}
 .about-main-img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(100%) contrast(1.08);display:block;}
@@ -371,8 +371,7 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
 <nav>
   <a href="#" class="nav-logo">SAW<em>I</em></a>
   <ul class="nav-links">
-    <li><a href="#about">Sobre mí</a></li>
-    <li><a href="#ebooks">Ebooks</a></li>
+        <li><a href="#ebooks">Ebooks</a></li>
     <li><a href="#beats">Beats</a></li>
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#testimonios">Testimonios</a></li>
@@ -419,35 +418,6 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
     <source src="assets/videos/1c054cc607.mp4" type="video/mp4">
   </video>
 </div>
-
-<!-- SOBRE MÍ -->
-<section id="about">
-  <div class="sec-label">Sobre mí</div>
-  <h2 class="sec-title reveal">EL HOMBRE<br>DETRÁS<br>DEL SONIDO.</h2>
-  <div class="about-layout">
-    <div class="about-visual reveal">
-      <div class="about-tag">@sawi_mr</div>
-      <img class="about-main-img" src="assets/images/74bcf3855b.jpg" alt="SawI productor">
-      <div class="about-video-strip">
-        <div class="about-strip-item"><img src="assets/images/e98aa84455.jpg" alt="SawI estudio" loading="lazy"><div class="about-strip-overlay"></div></div>
-        <div class="about-strip-item"><img src="assets/images/0961766839.jpg" alt="SawI produciendo" loading="lazy"><div class="about-strip-overlay"></div></div>
-      </div>
-    </div>
-    <div class="reveal reveal-d1">
-      <p class="about-bio">Soy <strong>Saúl</strong>, productor musical bajo el nombre artístico <strong>SawI</strong>. Llevo años construyendo sonidos para artistas independientes y emergentes que buscan sonar a industria sin pagar precios de industria.</p>
-      <p class="about-bio">Trabajo <strong>Pop, Reggaetón, Trap, R&amp;B, Indie Pop y Detroit</strong>. Desde la producción hasta la mezcla y masterización. Creo ebooks, beats y contenido para que otros productores aprendan lo que nadie enseña.</p>
-      <div class="genres">
-        <span class="g-tag">Pop</span><span class="g-tag">Reggaetón</span><span class="g-tag">Trap</span><span class="g-tag">R&amp;B</span><span class="g-tag">Indie Pop</span><span class="g-tag">Detroit</span>
-      </div>
-      <div class="stats-row">
-        <div class="stat"><div class="stat-n">+70</div><div class="stat-l">Artistas<br>trabajados</div></div>
-        <div class="stat"><div class="stat-n">+5</div><div class="stat-l">Años<br>experiencia</div></div>
-        <div class="stat"><div class="stat-n">+10K€</div><div class="stat-l">Equipo<br>profesional</div></div>
-      </div>
-      <div style="margin-top:1.8rem;"><a href="#contacto" class="btn-p"><span>¿Tienes un proyecto? Hablemos →</span></a></div>
-    </div>
-  </div>
-</section>
 
 <!-- EBOOKS -->
 <section id="ebooks">
@@ -546,6 +516,21 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
   </div>
 </section>
 
+<!-- STORE CTA -->
+<section id="store-cta">
+  <div class="store-cta-inner reveal">
+    <div class="store-cta-tag">— Tienda SAWI</div>
+    <h2 class="store-cta-title">DEJA DE SONAR<br><span class="store-cta-em">A DEMO.</span></h2>
+    <p class="store-cta-text">Las técnicas, los packs de sonidos y la formación que uso yo. Listos para descargar y empezar a notarlo en tu próxima sesión de producción.</p>
+    <a href="https://tienda.sawiprods.com" target="_blank" rel="noopener" class="store-cta-btn">
+      <span>Acceder a la tienda</span>
+      <span class="store-cta-arrow">→</span>
+    </a>
+    <div class="store-cta-perks">Ebooks · Sample packs · Cursos · Presets</div>
+  </div>
+</section>
+
+
 <!-- SERVICIOS -->
 <section id="servicios">
   <div class="srv-header reveal">
@@ -639,20 +624,6 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
   <p class="srv-disclaimer reveal">¿Proyecto diferente? Los precios son orientativos. Cuéntame tu idea y presupuestamos sin compromiso.</p>
 </section>
 
-
-<!-- STORE CTA -->
-<section id="store-cta">
-  <div class="store-cta-inner reveal">
-    <div class="store-cta-tag">— Tienda SAWI</div>
-    <h2 class="store-cta-title">DEJA DE SONAR<br><span class="store-cta-em">A DEMO.</span></h2>
-    <p class="store-cta-text">Las técnicas, los packs de sonidos y la formación que uso yo. Listos para descargar y empezar a notarlo en tu próxima sesión de producción.</p>
-    <a href="https://tienda.sawiprods.com" target="_blank" rel="noopener" class="store-cta-btn">
-      <span>Acceder a la tienda</span>
-      <span class="store-cta-arrow">→</span>
-    </a>
-    <div class="store-cta-perks">Ebooks · Sample packs · Cursos · Presets</div>
-  </div>
-</section>
 
 <!-- VIDEO BREAK 2 -->
 <div class="video-break">
@@ -826,7 +797,7 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
 <footer>
   <div class="f-brand"><div class="f-brand-name">SAW<em>I</em></div><p>Productor musical en España. Sonido de industria para artistas que van en serio.</p></div>
   <div class="f-links"><h4>Navegación</h4><ul>
-    <li><a href="#about">Sobre mí</a></li><li><a href="#ebooks">Ebooks</a></li>
+    <li><a href="#ebooks">Ebooks</a></li>
     <li><a href="#beats">Beats</a></li><li><a href="#servicios">Servicios</a></li>
     <li><a href="#testimonios">Testimonios</a></li>
     <li><a href="#newsletter">Newsletter</a></li><li><a href="#contacto">Contacto</a></li>
