@@ -73,8 +73,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.3rem 4rem;display:
 .proof-bar{position:relative;z-index:2;display:flex;gap:2.5rem;margin-top:2.2rem;padding-top:1.6rem;border-top:1px solid var(--border);opacity:0;animation:fadeIn 1s .9s ease forwards;flex-wrap:wrap;}
 .proof-num{font-family:var(--fd);font-size:2.2rem;color:var(--gold);line-height:1;}
 .proof-label{font-family:var(--fm);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.15rem;}
-.scroll-hint{position:absolute;right:4rem;bottom:4rem;z-index:2;display:flex;flex-direction:column;align-items:center;gap:.4rem;font-family:var(--fm);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);animation:fadeIn 1.5s 1.2s ease forwards;opacity:0;}
-.scroll-line{width:1px;height:45px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollAnim 1.5s infinite;}
+
+
 
 .marquee-wrap{padding:1.1rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;background:var(--off);}
 .marquee-inner{display:flex;gap:3rem;animation:marquee 18s linear infinite;white-space:nowrap;}
@@ -216,6 +216,8 @@ section{padding:7rem 4rem;}
 .srv-name{font-family:var(--fd);font-size:1.65rem;line-height:1;letter-spacing:.04em;margin-bottom:.6rem;}
 .srv-desc{font-size:.81rem;color:var(--muted);line-height:1.62;margin-bottom:1.5rem;}
 .srv-price{font-family:var(--fd);font-size:2.5rem;color:var(--gold);line-height:1;}
+.srv-pricing-dual{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.4rem;}.srv-price-row{display:flex;align-items:baseline;gap:.7rem;}.srv-price-tag{font-family:var(--fd);font-size:1.7rem;color:var(--gold);line-height:1;letter-spacing:.02em;}.srv-price-tag.srv-price-gold{color:var(--white);}.srv-price-label{font-family:var(--fm);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+
 .srv-note{font-family:var(--fm);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.22rem;}
 .srv-hint{font-family:var(--fm);font-size:.58rem;letter-spacing:.08em;color:rgba(200,169,126,.45);margin-top:1.2rem;display:flex;align-items:center;gap:.4rem;}
 .srv-hint::before{content:'';display:inline-block;width:12px;height:1px;background:rgba(200,169,126,.45);}
@@ -299,9 +301,9 @@ section{padding:7rem 4rem;}
 .wa-btn{display:inline-flex;align-items:center;gap:.7rem;background:#25d366;color:white;padding:.88rem 1.6rem;font-family:var(--fm);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:opacity .2s;}
 .wa-btn:hover{opacity:.85;}
 
-footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--off);display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.5rem;align-items:start;}
+footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--off);display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;align-items:start;}
 .f-brand-name{font-family:var(--fd);font-size:2.5rem;letter-spacing:.1em;line-height:1;}
-.f-brand-name em{color:var(--gold);font-style:normal;}
+.f-brand-name em{color:var(--white);font-style:normal;}
 .f-brand p{font-size:.82rem;color:var(--muted);line-height:1.62;margin-top:.6rem;max-width:220px;}
 .f-links h4{font-family:var(--fm);font-size:.57rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
 .f-links ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
@@ -324,12 +326,26 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
   .about-layout,.beats-content,.contact-grid{grid-template-columns:1fr;gap:2.5rem;}
   .ebooks-grid,.srv-grid,.testi-grid{grid-template-columns:1fr;}
   footer{grid-template-columns:1fr;padding:2.5rem 1.5rem;}
-  .scroll-hint,.proof-bar{display:none;}
+  .proof-bar{display:none;}
   .ebooks-header,.srv-header{flex-direction:column;gap:1rem;align-items:flex-start;}
   .ebooks-urgency{flex-direction:column;gap:1rem;}
   .srv-back{position:static;opacity:1;transform:none;display:none;}
   .srv-card:hover .srv-front{opacity:1;transform:none;}
 }
+/* COOKIES BANNER */
+.ck-banner{position:fixed;bottom:1.2rem;left:1.2rem;right:1.2rem;max-width:680px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:1.2rem 1.4rem;z-index:9999;display:none;flex-direction:column;gap:.8rem;box-shadow:0 12px 40px rgba(0,0,0,.55);font-family:var(--fb);}
+.ck-banner.show{display:flex;animation:ckUp .35s ease;}
+@keyframes ckUp{from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.ck-banner h4{font-family:var(--fd);font-size:1.1rem;letter-spacing:.04em;color:var(--white);margin:0;}
+.ck-banner p{font-size:.78rem;color:rgba(244,239,230,.65);line-height:1.55;margin:0;}
+.ck-banner p a{color:var(--gold);text-decoration:underline;}
+.ck-actions{display:flex;gap:.6rem;flex-wrap:wrap;}
+.ck-btn{font-family:var(--fm);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;padding:.62rem 1.1rem;border:none;cursor:pointer;transition:all .2s;}
+.ck-btn-accept{background:var(--gold);color:var(--black);}
+.ck-btn-accept:hover{background:var(--white);}
+.ck-btn-reject{background:transparent;color:var(--white);border:1px solid var(--border);}
+.ck-btn-reject:hover{border-color:var(--gold);color:var(--gold);}
+@media(max-width:600px){.ck-banner{bottom:.6rem;left:.6rem;right:.6rem;padding:1rem;}}
 </style>
 </head>
 <body>
@@ -372,7 +388,6 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
       <div><div class="proof-num">100%</div><div class="proof-label">Dedicación<br>total</div></div>
     </div>
   </div>
-  <div class="scroll-hint"><div class="scroll-line"></div><span>scroll</span></div>
 </section>
 
 <!-- MARQUEE -->
@@ -535,8 +550,8 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
       <div class="srv-front">
         <div class="srv-name">MIXING +<br>MASTERING</div>
         <p class="srv-desc">Tu canción al nivel de streaming. Mezcla profesional y masterización lista para distribuir.</p>
-        <div class="srv-price">100–130€</div>
-        <div class="srv-note">Precio base · consulta detalles</div>
+        <div class="srv-price">120€</div>
+        <div class="srv-note">Precio fijo · IVA incluido</div>
         <div class="srv-hint">Pasa el cursor para ver qué incluye</div>
       </div>
       <div class="srv-back">
@@ -560,8 +575,8 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
       <div class="srv-front">
         <div class="srv-name">FULL<br>PRODUCCIÓN</div>
         <p class="srv-desc">De la idea al master. Beat, arreglos, mezcla y mastering. Resultado listo para distribuir.</p>
-        <div class="srv-price">~220€</div>
-        <div class="srv-note">Precio base · según proyecto</div>
+        <div class="srv-price">240€</div>
+        <div class="srv-note">Precio fijo · IVA incluido</div>
         <div class="srv-hint">Pasa el cursor para ver qué incluye</div>
       </div>
       <div class="srv-back">
@@ -587,8 +602,8 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
       <div class="srv-front">
         <div class="srv-name">CUSTOM<br>BEAT</div>
         <p class="srv-desc">Beat hecho exclusivamente para tu proyecto. Con o sin licencia exclusiva.</p>
-        <div class="srv-price">120–150€</div>
-        <div class="srv-note">Sin licencia / Con licencia exclusiva</div>
+        <div class="srv-pricing-dual"><div class="srv-price-row"><span class="srv-price-tag">130€</span><span class="srv-price-label">Sin licencia exclusiva</span></div><div class="srv-price-row"><span class="srv-price-tag srv-price-gold">290€</span><span class="srv-price-label">Con licencia exclusiva</span></div></div>
+        <div class="srv-note">Dos opciones disponibles</div>
         <div class="srv-hint">Pasa el cursor para ver qué incluye</div>
       </div>
       <div class="srv-back">
@@ -794,7 +809,12 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
     <li><a href="https://www.tiktok.com/@sawi_mr" target="_blank">TikTok @sawi_mr</a></li>
     <li><a href="https://sawiprods.beatstars.com/" target="_blank">Beatstars</a></li>
   </ul></div>
-  <div class="f-bottom"><span>© 2025 SawI. Todos los derechos reservados.</span><span>Hecho con intención.</span></div>
+  <div class="f-links"><h4>Legal</h4><ul>
+    <li><a href="aviso-legal.html">Aviso legal</a></li>
+    <li><a href="privacidad.html">Privacidad</a></li>
+    <li><a href="cookies.html">Cookies</a></li>
+  </ul></div>
+  <div class="f-bottom"><span>© 2026 SAWI. Todos los derechos reservados.</span><span>Hecho con intención.</span></div>
 </footer>
 
 <!-- Hidden testimony video sources -->
@@ -995,6 +1015,25 @@ document.getElementById('nlBtn').addEventListener('click',async function(){
 });
 
 document.querySelectorAll('video[autoplay]').forEach(v=>v.play().catch(()=>{}));
+
+// COOKIES BANNER
+(function(){
+  const KEY='sawi_cookies_consent';
+  const banner=document.getElementById('ckBanner');
+  if(!banner) return;
+  if(!localStorage.getItem(KEY)){setTimeout(()=>banner.classList.add('show'),900);}
+  window.ckAccept=function(){localStorage.setItem(KEY,'accepted');banner.classList.remove('show');};
+  window.ckReject=function(){localStorage.setItem(KEY,'rejected');banner.classList.remove('show');};
+})();
 </script>
+
+<div class="ck-banner" id="ckBanner" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
+  <h4>Cookies. Las imprescindibles, nada mas.</h4>
+  <p>Usamos solo cookies tecnicas para que la web funcione y recordemos tu eleccion. No hay analitica de terceros ni publicidad. <a href="cookies.html">Mas info</a>.</p>
+  <div class="ck-actions">
+    <button class="ck-btn ck-btn-accept" onclick="ckAccept()">Aceptar</button>
+    <button class="ck-btn ck-btn-reject" onclick="ckReject()">Rechazar</button>
+  </div>
+</div>
 </body>
 </html>
