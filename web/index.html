@@ -346,6 +346,22 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
 .ck-btn-reject{background:transparent;color:var(--white);border:1px solid var(--border);}
 .ck-btn-reject:hover{border-color:var(--gold);color:var(--gold);}
 @media(max-width:600px){.ck-banner{bottom:.6rem;left:.6rem;right:.6rem;padding:1rem;}}
+.ebook-card{color:inherit;text-decoration:none;}
+#store-cta{padding:7rem 4rem;background:linear-gradient(180deg,var(--black) 0%,#0a0a0a 50%,var(--black) 100%);text-align:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+#store-cta::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:200px;height:1px;background:linear-gradient(90deg,transparent,#10b981,transparent);}
+.store-cta-inner{max-width:780px;margin:0 auto;}
+.store-cta-tag{font-family:var(--fm);font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:#10b981;margin-bottom:1.4rem;}
+.store-cta-title{font-family:var(--fd);font-size:clamp(2.5rem,7vw,5.5rem);line-height:.92;letter-spacing:.01em;margin-bottom:1.5rem;}
+.store-cta-em{color:transparent;-webkit-text-stroke:1px #10b981;display:inline-block;}
+.store-cta-text{font-size:1rem;color:var(--muted);line-height:1.75;margin-bottom:2.4rem;max-width:560px;margin-left:auto;margin-right:auto;}
+.store-cta-btn{display:inline-flex;align-items:center;gap:.7rem;font-family:var(--fm);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;background:#10b981;color:#06241a;padding:1.05rem 2.4rem;text-decoration:none;border:none;position:relative;overflow:hidden;transition:all .3s cubic-bezier(.2,.8,.2,1);box-shadow:0 8px 24px rgba(16,185,129,.25);font-weight:700;}
+.store-cta-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.18) 50%,transparent 100%);transform:translateX(-100%);transition:transform .55s ease;}
+.store-cta-btn:hover{background:#0fcb91;color:#031c14;transform:translateY(-2px);box-shadow:0 14px 36px rgba(16,185,129,.45);}
+.store-cta-btn:hover::before{transform:translateX(100%);}
+.store-cta-arrow{display:inline-block;transition:transform .3s ease;}
+.store-cta-btn:hover .store-cta-arrow{transform:translateX(4px);}
+.store-cta-perks{margin-top:2rem;font-family:var(--fm);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+@media(max-width:600px){#store-cta{padding:4rem 1.5rem;}.store-cta-text{font-size:.92rem;}.store-cta-btn{padding:.9rem 1.8rem;font-size:.7rem;}}
 </style>
 </head>
 <body>
@@ -443,39 +459,35 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
     <p class="reveal reveal-d1">Recursos que normalmente cuestan dinero, gratis para ti. Crea tu cuenta y descarga. Los productores que los leen no vuelven a mezclar igual.</p>
   </div>
   <div class="ebooks-grid">
-    <div class="ebook-card reveal" onclick="openEbookModal('Mastering Sidechain')">
+    <a class="ebook-card reveal" href="https://tienda.sawiprods.com" target="_blank" rel="noopener">
       <div class="ebook-img-wrap"><img src="assets/images/2c0ed6352b.png" alt="Sidechain" loading="lazy"><div class="ebook-overlay"></div><div class="ebook-badge">GRATIS</div></div>
       <div class="ebook-body">
         <div class="ebook-num">Ebook 01 · Mezcla</div>
         <div class="ebook-title">MASTERING<br>SIDECHAIN</div>
         <p class="ebook-desc">Todo sobre el Sidechain. Kick &amp; Bass que se separan solos. Tu mezcla nunca volverá a sonar apelmazada.</p>
-        <button class="ebook-dl-btn" onclick="openEbookModal('Mastering Sidechain');event.stopPropagation();">Descargar gratis →</button>
+        <span class="ebook-dl-btn">Adquirir gratis →</span>
       </div>
-    </div>
-    <div class="ebook-card reveal reveal-d1" onclick="openEbookModal('Herramientas de Dinámica')">
+    </a>
+    <a class="ebook-card reveal reveal-d1" href="https://tienda.sawiprods.com" target="_blank" rel="noopener">
       <div class="ebook-img-wrap"><img src="assets/images/09dc84437c.png" alt="Herramientas de Dinámica" loading="lazy"><div class="ebook-overlay"></div><div class="ebook-badge">GRATIS</div></div>
       <div class="ebook-body">
         <div class="ebook-num">Ebook 02 · Dinámica</div>
         <div class="ebook-title">HERRAMIENTAS<br>DE DINÁMICA</div>
         <p class="ebook-desc">Compresor, Limitador y Clipper sin rodeos. La diferencia entre un beat amateur y uno de industria.</p>
-        <button class="ebook-dl-btn" onclick="openEbookModal('Herramientas de Dinámica');event.stopPropagation();">Descargar gratis →</button>
+        <span class="ebook-dl-btn">Adquirir gratis →</span>
       </div>
-    </div>
-    <div class="ebook-card reveal reveal-d2" onclick="openEbookModal('Dominio de la Voz')">
+    </a>
+    <a class="ebook-card reveal reveal-d2" href="https://tienda.sawiprods.com" target="_blank" rel="noopener">
       <div class="ebook-img-wrap"><img src="assets/images/3630864d97.png" alt="Dominio Voz" loading="lazy"><div class="ebook-overlay"></div><div class="ebook-badge">GRATIS</div></div>
       <div class="ebook-body">
         <div class="ebook-num">Ebook 03 · Voz</div>
         <div class="ebook-title">DOMINIO<br>DE LA VOZ</div>
         <p class="ebook-desc">10 ejercicios para mejorar tu canto. Técnicas reales para artistas que quieren sonar bien en estudio.</p>
-        <button class="ebook-dl-btn" onclick="openEbookModal('Dominio de la Voz');event.stopPropagation();">Descargar gratis →</button>
+        <span class="ebook-dl-btn">Adquirir gratis →</span>
       </div>
-    </div>
+    </a>
   </div>
-  <div class="ebooks-urgency reveal">
-    <div class="urgency-text"><strong>¿Tienes el código del reel?</strong>Úsalo en el checkout y llévate los próximos ebooks de pago al 100% gratis. Sígueme en Instagram y TikTok.</div>
-    <a href="#newsletter" class="btn-p" style="background:var(--red);"><span>Suscribirme y acceder →</span></a>
-  </div>
-</section>
+  </section>
 
 <!-- EBOOK REGISTER MODAL -->
 <div class="modal-overlay" id="ebookModal">
@@ -625,6 +637,21 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
 
   </div>
   <p class="srv-disclaimer reveal">¿Proyecto diferente? Los precios son orientativos. Cuéntame tu idea y presupuestamos sin compromiso.</p>
+</section>
+
+
+<!-- STORE CTA -->
+<section id="store-cta">
+  <div class="store-cta-inner reveal">
+    <div class="store-cta-tag">— Tienda SAWI</div>
+    <h2 class="store-cta-title">DEJA DE SONAR<br><span class="store-cta-em">A DEMO.</span></h2>
+    <p class="store-cta-text">Las técnicas, los packs de sonidos y la formación que uso yo. Listos para descargar y empezar a notarlo en tu próxima sesión de producción.</p>
+    <a href="https://tienda.sawiprods.com" target="_blank" rel="noopener" class="store-cta-btn">
+      <span>Acceder a la tienda</span>
+      <span class="store-cta-arrow">→</span>
+    </a>
+    <div class="store-cta-perks">Ebooks · Sample packs · Cursos · Presets</div>
+  </div>
 </section>
 
 <!-- VIDEO BREAK 2 -->
@@ -814,7 +841,7 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
     <li><a href="privacidad.html">Privacidad</a></li>
     <li><a href="cookies.html">Cookies</a></li>
   </ul></div>
-  <div class="f-bottom"><span>© 2026 SAWI. Todos los derechos reservados.</span><span>Hecho con intención.</span></div>
+  <div class="f-bottom"><span>© 2026 SAWI. Todos los derechos reservados.</span></div>
 </footer>
 
 <!-- Hidden testimony video sources -->
