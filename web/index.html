@@ -213,7 +213,7 @@ section{padding:7rem 4rem;}
 .srv-back-cta a{font-family:var(--fm);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:.62rem 1.4rem;text-decoration:none;display:inline-block;transition:background .2s;}
 .srv-back-cta a:hover{background:var(--white);}
 /* Front elements */
-.srv-name{font-family:var(--fd);font-size:1.65rem;line-height:1;letter-spacing:.04em;margin-bottom:.6rem;}
+.srv-name{font-family:var(--fd);font-size:2.6rem;line-height:.95;letter-spacing:.04em;margin-bottom:1rem;}
 .srv-desc{font-size:.81rem;color:var(--muted);line-height:1.62;margin-bottom:1.5rem;}
 .srv-price{font-family:var(--fd);font-size:2.5rem;color:var(--gold);line-height:1;}
 .srv-pricing-dual{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.4rem;}.srv-price-row{display:flex;align-items:baseline;gap:.7rem;}.srv-price-tag{font-family:var(--fd);font-size:1.7rem;color:var(--gold);line-height:1;letter-spacing:.02em;}.srv-price-tag.srv-price-gold{color:var(--white);}.srv-price-label{font-family:var(--fm);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
@@ -371,11 +371,9 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
 <nav>
   <a href="#" class="nav-logo">SAW<em>I</em></a>
   <ul class="nav-links">
-        <li><a href="#ebooks">Ebooks</a></li>
-    <li><a href="#beats">Beats</a></li>
+        <li><a href="#beats">Beats</a></li>
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#testimonios">Testimonios</a></li>
-    <li><a href="#newsletter">Newsletter</a></li>
     <li><a href="#contacto" class="nav-cta">Trabajemos</a></li>
   </ul>
 </nav>
@@ -417,67 +415,6 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
   <video autoplay muted loop playsinline>
     <source src="assets/videos/1c054cc607.mp4" type="video/mp4">
   </video>
-</div>
-
-<!-- EBOOKS -->
-<section id="ebooks">
-  <div class="ebooks-header">
-    <div>
-      <div class="sec-label">Conocimiento que convierte</div>
-      <h2 class="sec-title reveal">EBOOKS<br>GRATUITOS.</h2>
-    </div>
-    <p class="reveal reveal-d1">Recursos que normalmente cuestan dinero, gratis para ti. Crea tu cuenta y descarga. Los productores que los leen no vuelven a mezclar igual.</p>
-  </div>
-  <div class="ebooks-grid">
-    <a class="ebook-card reveal" href="https://shop.sawiprods.com" target="_blank" rel="noopener">
-      <div class="ebook-img-wrap"><img src="assets/images/2c0ed6352b.png" alt="Sidechain" loading="lazy"><div class="ebook-overlay"></div><div class="ebook-badge">GRATIS</div></div>
-      <div class="ebook-body">
-        <div class="ebook-num">Ebook 01 · Mezcla</div>
-        <div class="ebook-title">MASTERING<br>SIDECHAIN</div>
-        <p class="ebook-desc">Todo sobre el Sidechain. Kick &amp; Bass que se separan solos. Tu mezcla nunca volverá a sonar apelmazada.</p>
-        <span class="ebook-dl-btn">Adquirir gratis →</span>
-      </div>
-    </a>
-    <a class="ebook-card reveal reveal-d1" href="https://shop.sawiprods.com" target="_blank" rel="noopener">
-      <div class="ebook-img-wrap"><img src="assets/images/09dc84437c.png" alt="Herramientas de Dinámica" loading="lazy"><div class="ebook-overlay"></div><div class="ebook-badge">GRATIS</div></div>
-      <div class="ebook-body">
-        <div class="ebook-num">Ebook 02 · Dinámica</div>
-        <div class="ebook-title">HERRAMIENTAS<br>DE DINÁMICA</div>
-        <p class="ebook-desc">Compresor, Limitador y Clipper sin rodeos. La diferencia entre un beat amateur y uno de industria.</p>
-        <span class="ebook-dl-btn">Adquirir gratis →</span>
-      </div>
-    </a>
-    <a class="ebook-card reveal reveal-d2" href="https://shop.sawiprods.com" target="_blank" rel="noopener">
-      <div class="ebook-img-wrap"><img src="assets/images/3630864d97.png" alt="Dominio Voz" loading="lazy"><div class="ebook-overlay"></div><div class="ebook-badge">GRATIS</div></div>
-      <div class="ebook-body">
-        <div class="ebook-num">Ebook 03 · Voz</div>
-        <div class="ebook-title">DOMINIO<br>DE LA VOZ</div>
-        <p class="ebook-desc">10 ejercicios para mejorar tu canto. Técnicas reales para artistas que quieren sonar bien en estudio.</p>
-        <span class="ebook-dl-btn">Adquirir gratis →</span>
-      </div>
-    </a>
-  </div>
-  </section>
-
-<!-- EBOOK REGISTER MODAL -->
-<div class="modal-overlay" id="ebookModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeEbookModal()">✕ Cerrar</button>
-    <div id="modalForm">
-      <div class="modal-title">ACCESO<br>GRATUITO</div>
-      <div class="modal-sub" id="modalEbookName">Ebook · SawI</div>
-      <div class="modal-field"><label>Nombre artístico o nombre</label><input type="text" id="regName" placeholder="Tu nombre..."></div>
-      <div class="modal-field"><label>Email</label><input type="email" id="regEmail" placeholder="tu@email.com"></div>
-      <button class="modal-submit" id="regSubmit" onclick="submitRegister()">Crear cuenta y descargar →</button>
-      <p class="modal-note">Sin spam. Solo valor real. También recibirás la newsletter semanal.</p>
-      <p id="modalError" style="display:none;color:#e85a4f;font-family:var(--fm);font-size:.62rem;letter-spacing:.07em;margin-top:.6rem;text-align:center;"></p>
-    </div>
-    <div class="modal-success" id="modalSuccess">
-      <div class="modal-success-icon">✅</div>
-      <div class="modal-success-title">¡LISTO, <span id="successName"></span>!</div>
-      <p class="modal-success-desc">Te hemos guardado en la lista. En breve te llega un email con el ebook. Revisa la carpeta de <strong>Promociones</strong> o <strong>Spam</strong> si no lo ves.</p>
-    </div>
-  </div>
 </div>
 
 <!-- VIDEO BREAK 1 -->
@@ -547,8 +484,8 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
       <div class="srv-front">
         <div class="srv-name">MIXING +<br>MASTERING</div>
         <p class="srv-desc">Tu canción al nivel de streaming. Mezcla profesional y masterización lista para distribuir.</p>
-        <div class="srv-price">120€</div>
-        <div class="srv-note">Precio fijo · IVA incluido</div>
+        <div class="srv-price">Consultar</div>
+        <div class="srv-note">Presupuesto personalizado</div>
         <div class="srv-hint">Pasa el cursor para ver qué incluye</div>
       </div>
       <div class="srv-back">
@@ -572,8 +509,8 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
       <div class="srv-front">
         <div class="srv-name">FULL<br>PRODUCCIÓN</div>
         <p class="srv-desc">De la idea al master. Beat, arreglos, mezcla y mastering. Resultado listo para distribuir.</p>
-        <div class="srv-price">240€</div>
-        <div class="srv-note">Precio fijo · IVA incluido</div>
+        <div class="srv-price">Consultar</div>
+        <div class="srv-note">Presupuesto personalizado</div>
         <div class="srv-hint">Pasa el cursor para ver qué incluye</div>
       </div>
       <div class="srv-back">
@@ -599,8 +536,8 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
       <div class="srv-front">
         <div class="srv-name">CUSTOM<br>BEAT</div>
         <p class="srv-desc">Beat hecho exclusivamente para tu proyecto. Con o sin licencia exclusiva.</p>
-        <div class="srv-pricing-dual"><div class="srv-price-row"><span class="srv-price-tag">130€</span><span class="srv-price-label">Sin licencia exclusiva</span></div><div class="srv-price-row"><span class="srv-price-tag srv-price-gold">290€</span><span class="srv-price-label">Con licencia exclusiva</span></div></div>
-        <div class="srv-note">Dos opciones disponibles</div>
+        <div class="srv-price">Consultar</div>
+        <div class="srv-note">Sin / con licencia exclusiva</div>
         <div class="srv-hint">Pasa el cursor para ver qué incluye</div>
       </div>
       <div class="srv-back">
@@ -695,26 +632,6 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
   </div>
 </div>
 
-<!-- NEWSLETTER -->
-<section id="newsletter">
-  <div class="nl-inner reveal">
-    <div class="sec-label">Newsletter semanal</div>
-    <h2 class="nl-title">SABER MÁS.<br>GANAR MÁS.</h2>
-    <p class="nl-sub">Cada semana: herramientas reales, tendencias del sector y ofertas que no verás en redes. Tú primero, siempre.</p>
-    <div class="nl-perks">
-      <span class="perk">Ofertas exclusivas</span>
-      <span class="perk">Acceso anticipado</span>
-      <span class="perk">Contenido privado</span>
-      <span class="perk">Códigos de descuento</span>
-    </div>
-    <div class="nl-form">
-      <input type="email" id="nlEmail" placeholder="tu@email.com">
-      <button id="nlBtn" type="button">Quiero acceso</button>
-    </div>
-    <p class="nl-note" id="nlNote">Sin spam. Solo valor real. Cancela cuando quieras.</p>
-  </div>
-</section>
-
 <!-- CONTACTO -->
 <section id="contacto">
   <div class="sec-label">¿Tienes un proyecto serio?</div>
@@ -797,10 +714,9 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
 <footer>
   <div class="f-brand"><div class="f-brand-name">SAW<em>I</em></div><p>Productor musical en España. Sonido de industria para artistas que van en serio.</p></div>
   <div class="f-links"><h4>Navegación</h4><ul>
-    <li><a href="#ebooks">Ebooks</a></li>
     <li><a href="#beats">Beats</a></li><li><a href="#servicios">Servicios</a></li>
     <li><a href="#testimonios">Testimonios</a></li>
-    <li><a href="#newsletter">Newsletter</a></li><li><a href="#contacto">Contacto</a></li>
+    <li><a href="#contacto">Contacto</a></li>
   </ul></div>
   <div class="f-links"><h4>Redes</h4><ul>
     <li><a href="https://www.instagram.com/sawi_mr" target="_blank">Instagram @sawi_mr</a></li>
