@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2210%22%20fill%3D%22%23060606%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2240%22%20font-weight%3D%22900%22%20fill%3D%22%23c8a96a%22%20text-anchor%3D%22middle%22%3ES%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="icon" type="image/png" href="assets/images/favicon-256.png">
 <meta name="description" content="SawI - Productor musical en Espana. Mixing, mastering, beats y produccion para Pop, Reggaeton, Trap, R&B e Indie Pop. El sonido que te faltaba.">
 <meta name="keywords" content="productor musical, mixing, mastering, beats, sawi, sawiprods, productor espana, beats trap, beats reggaeton, ebooks produccion musical">
 <meta name="author" content="SawI">
@@ -213,7 +213,7 @@ section{padding:7rem 4rem;}
 .srv-back-cta a{font-family:var(--fm);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:var(--black);padding:.62rem 1.4rem;text-decoration:none;display:inline-block;transition:background .2s;}
 .srv-back-cta a:hover{background:var(--white);}
 /* Front elements */
-.srv-name{font-family:var(--fd);font-size:2.6rem;line-height:.95;letter-spacing:.04em;margin-bottom:1rem;}
+.srv-name{font-family:var(--fd);font-size:3.2rem;line-height:.92;letter-spacing:.04em;margin-bottom:1.2rem;}
 .srv-desc{font-size:.81rem;color:var(--muted);line-height:1.62;margin-bottom:1.5rem;}
 .srv-price{font-family:var(--fd);font-size:2.5rem;color:var(--gold);line-height:1;}
 .srv-pricing-dual{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.4rem;}.srv-price-row{display:flex;align-items:baseline;gap:.7rem;}.srv-price-tag{font-family:var(--fd);font-size:1.7rem;color:var(--gold);line-height:1;letter-spacing:.02em;}.srv-price-tag.srv-price-gold{color:var(--white);}.srv-price-label{font-family:var(--fm);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
@@ -381,6 +381,67 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
 .store-cta-inner:hover .store-cta-perk{color:rgba(244,239,230,.85);}
 .store-cta-perk-sep{color:#10b981;}
 @media(max-width:700px){#store-cta{padding:5rem 1.5rem;}.store-cta-line-l{left:4%;}.store-cta-line-r{right:4%;}.store-cta-text{font-size:.95rem;}.store-cta-btn{padding:1rem 2rem;font-size:.7rem;}.store-cta-tag{font-size:.6rem;letter-spacing:.22em;}}
+
+/* DUO CTA: TIENDA + BEATS */
+#duo-cta{position:relative;padding:7rem 4rem;background:#040404;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.duo-cta-bg{position:absolute;inset:0;z-index:0;pointer-events:none;}
+.duo-cta-bg video{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.2) brightness(.22);opacity:.5;}
+.duo-cta-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,.55) 0%,rgba(0,0,0,.92) 80%);}
+.duo-cta-grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at center,rgba(0,0,0,.5) 0%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at center,rgba(0,0,0,.5) 0%,transparent 75%);}
+.duo-cta-header{position:relative;z-index:2;text-align:center;max-width:780px;margin:0 auto 4rem;}
+.duo-cta-tag{font-family:var(--fm);font-size:.65rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+.duo-cta-title{font-family:var(--fd);font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:.01em;color:var(--white);}
+.duo-cta-title em{color:transparent;-webkit-text-stroke:1px var(--gold);font-style:normal;margin-left:.4em;}
+.duo-cta-cols{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;gap:0;max-width:1280px;margin:0 auto;align-items:stretch;}
+.duo-col{position:relative;padding:3rem 2.6rem 2.6rem;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;isolation:isolate;}
+.duo-col-glow{position:absolute;inset:0;z-index:-1;opacity:.35;transition:opacity .5s ease;pointer-events:none;}
+.duo-col:hover .duo-col-glow{opacity:.55;}
+.duo-col-glow-shop{background:radial-gradient(circle at 30% 20%,rgba(16,185,129,.32) 0%,transparent 60%),radial-gradient(circle at 80% 90%,rgba(16,185,129,.12) 0%,transparent 65%);}
+.duo-col-glow-beats{background:radial-gradient(circle at 70% 20%,rgba(230,57,70,.32) 0%,transparent 60%),radial-gradient(circle at 20% 90%,rgba(230,57,70,.12) 0%,transparent 65%);}
+.duo-col-tag{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--fm);font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;padding:.45rem 1rem;border-radius:999px;background:rgba(255,255,255,.04);align-self:flex-start;margin-bottom:1.4rem;}
+.duo-col-dot{width:5px;height:5px;border-radius:50%;animation:duoDot 1.6s ease-in-out infinite;}
+.duo-col-dot-shop{background:#10b981;box-shadow:0 0 10px #10b981;}
+.duo-col-dot-beats{background:#e63946;box-shadow:0 0 10px #e63946;}
+@keyframes duoDot{0%,100%{opacity:.4;transform:scale(.85);}50%{opacity:1;transform:scale(1.15);}}
+.duo-col-shop .duo-col-tag{color:#10b981;border:1px solid rgba(16,185,129,.3);}
+.duo-col-beats .duo-col-tag{color:#e63946;border:1px solid rgba(230,57,70,.3);}
+.duo-col-h{font-family:var(--fd);font-size:clamp(2rem,4.8vw,4rem);line-height:.95;letter-spacing:.01em;margin-bottom:1rem;color:var(--white);}
+.duo-col-em{display:inline-block;color:transparent;font-style:normal;-webkit-text-stroke:1.5px currentColor;}
+.duo-col-em-shop{color:#10b981;-webkit-text-stroke:1.5px #10b981;animation:duoEmShop 3.4s ease-in-out infinite;}
+.duo-col-em-beats{color:#e63946;-webkit-text-stroke:1.5px #e63946;animation:duoEmBeats 3.4s ease-in-out infinite;}
+@keyframes duoEmShop{0%,100%{filter:drop-shadow(0 0 0 transparent);}50%{filter:drop-shadow(0 0 14px rgba(16,185,129,.55));}}
+@keyframes duoEmBeats{0%,100%{filter:drop-shadow(0 0 0 transparent);}50%{filter:drop-shadow(0 0 14px rgba(230,57,70,.55));}}
+.duo-col-p{font-size:.95rem;color:rgba(244,239,230,.66);line-height:1.7;margin-bottom:2rem;max-width:380px;}
+.duo-btn{position:relative;display:inline-flex;align-items:center;gap:.7rem;align-self:flex-start;font-family:var(--fm);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;padding:1.1rem 2.2rem;text-decoration:none;font-weight:700;overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease;}
+.duo-btn-shop{background:#10b981;color:#03190f;box-shadow:0 0 0 1px rgba(16,185,129,.6),0 10px 28px rgba(16,185,129,.3),0 22px 60px rgba(16,185,129,.18);animation:duoBtnPulseShop 2.8s ease-in-out infinite;}
+.duo-btn-beats{background:#e63946;color:#28080a;box-shadow:0 0 0 1px rgba(230,57,70,.6),0 10px 28px rgba(230,57,70,.3),0 22px 60px rgba(230,57,70,.18);animation:duoBtnPulseBeats 2.8s ease-in-out infinite;}
+@keyframes duoBtnPulseShop{0%,100%{box-shadow:0 0 0 1px rgba(16,185,129,.6),0 10px 28px rgba(16,185,129,.28),0 22px 60px rgba(16,185,129,.15);}50%{box-shadow:0 0 0 1px rgba(16,185,129,.85),0 14px 38px rgba(16,185,129,.5),0 30px 80px rgba(16,185,129,.3);}}
+@keyframes duoBtnPulseBeats{0%,100%{box-shadow:0 0 0 1px rgba(230,57,70,.6),0 10px 28px rgba(230,57,70,.28),0 22px 60px rgba(230,57,70,.15);}50%{box-shadow:0 0 0 1px rgba(230,57,70,.85),0 14px 38px rgba(230,57,70,.5),0 30px 80px rgba(230,57,70,.3);}}
+.duo-btn-glow{position:absolute;inset:0;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.35) 50%,transparent 100%);transform:translateX(-110%);transition:transform .65s ease;}
+.duo-btn-text,.duo-btn-arrow{position:relative;z-index:1;}
+.duo-btn-arrow{display:inline-block;transition:transform .3s cubic-bezier(.2,.8,.2,1);}
+.duo-btn:hover{transform:translateY(-3px) scale(1.02);}
+.duo-btn:hover .duo-btn-glow{transform:translateX(110%);}
+.duo-btn:hover .duo-btn-arrow{transform:translateX(6px);}
+.duo-col-perks{margin-top:1.6rem;font-family:var(--fm);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,239,230,.42);}
+.duo-cta-sep{display:flex;align-items:center;justify-content:center;padding:0 1.5rem;}
+.duo-cta-sep span{display:block;width:1px;height:80%;background:linear-gradient(180deg,transparent 0%,rgba(244,239,230,.18) 30%,rgba(244,239,230,.18) 70%,transparent 100%);}
+@media(max-width:900px){
+  #duo-cta{padding:4rem 1.5rem;}
+  .duo-cta-cols{grid-template-columns:1fr;gap:1.5rem;}
+  .duo-cta-sep{padding:.5rem 0;}
+  .duo-cta-sep span{width:60%;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(244,239,230,.2) 50%,transparent 100%);margin:0 auto;}
+  .duo-col{padding:2rem 1.4rem;}
+  .duo-cta-header{margin-bottom:2.5rem;}
+}
+/* Servicios: click toggle para movil */
+.srv-card{cursor:pointer;}
+.srv-card.is-open .srv-front{opacity:0;transform:translateY(-12px);pointer-events:none;}
+.srv-card.is-open .srv-back{opacity:1;transform:translateY(0);pointer-events:auto;}
+.srv-card.is-open::before{transform:scaleX(1);}
+.srv-front{user-select:none;}
+.srv-hint-mob{display:none;}
+@media(max-width:900px){.srv-hint{display:none;}.srv-hint-mob{display:block;font-family:var(--fm);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-top:1rem;}}
 </style>
 </head>
 <body>
@@ -390,8 +451,7 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
 <nav>
   <a href="#" class="nav-logo">SAW<em>I</em></a>
   <ul class="nav-links">
-        <li><a href="#beats">Beats</a></li>
-    <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#servicios">Servicios</a></li>
     <li><a href="#testimonios">Testimonios</a></li>
     <li><a href="#contacto" class="nav-cta">Trabajemos</a></li>
   </ul>
@@ -411,7 +471,6 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
     <p class="hero-sub">Pop, Reggaetón, Trap, R&amp;B, Indie Pop, Detroit.<br>Producción, mezcla, mastering y conocimiento para artistas que van en serio.</p>
     <div class="hero-btns">
       <a href="#servicios" class="btn-p"><span>Ver servicios →</span></a>
-      <a href="#ebooks" class="btn-g">Ebooks gratis</a>
     </div>
     <div class="proof-bar">
       <div><div class="proof-num">+70</div><div class="proof-label">Artistas<br>trabajados</div></div>
@@ -436,74 +495,57 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
   </video>
 </div>
 
-<!-- STORE CTA -->
-<section id="store-cta">
-  <div class="store-cta-bg">
-    <div class="store-cta-line store-cta-line-l"></div>
-    <div class="store-cta-line store-cta-line-r"></div>
-    <div class="store-cta-orb store-cta-orb-1"></div>
-    <div class="store-cta-orb store-cta-orb-2"></div>
-    <div class="store-cta-grid"></div>
+<!-- DUO CTA: TIENDA + BEATS -->
+<section id="duo-cta">
+  <div class="duo-cta-bg">
+    <video autoplay muted loop playsinline>
+      <source src="assets/videos/a50df72009.mp4" type="video/mp4">
+    </video>
+    <div class="duo-cta-overlay"></div>
+    <div class="duo-cta-grid-lines"></div>
   </div>
-  <div class="store-cta-inner reveal">
-    <div class="store-cta-tag">
-      <span class="store-cta-tag-dot"></span>
-      Tienda SAWI
-      <span class="store-cta-tag-dot"></span>
-    </div>
-    <h2 class="store-cta-title">DEJA DE SONAR<br><span class="store-cta-em">A DEMO.</span></h2>
-    <p class="store-cta-text">Las técnicas, los packs de sonidos y la formación que uso yo.<br>Listos para descargar y empezar a notarlo en tu próxima sesión.</p>
-    <a href="https://shop.sawiprods.com" target="_blank" rel="noopener" class="store-cta-btn">
-      <span class="store-cta-btn-glow"></span>
-      <span class="store-cta-btn-text">Acceder a la tienda</span>
-      <span class="store-cta-arrow">→</span>
-    </a>
-    <div class="store-cta-perks">
-      <span class="store-cta-perk">Ebooks</span>
-      <span class="store-cta-perk-sep">•</span>
-      <span class="store-cta-perk">Sample packs</span>
-      <span class="store-cta-perk-sep">•</span>
-      <span class="store-cta-perk">Cursos</span>
-      <span class="store-cta-perk-sep">•</span>
-      <span class="store-cta-perk">Presets</span>
-    </div>
+
+  <div class="duo-cta-header reveal">
+    <div class="duo-cta-tag">— Por dónde quieres empezar</div>
+    <h2 class="duo-cta-title">EL SONIDO<em>NO MIENTE.</em></h2>
   </div>
-</section>
 
-
-<!-- VIDEO BREAK 1 -->
-<div class="video-break">
-  <video autoplay muted loop playsinline>
-    <source src="assets/videos/a50df72009.mp4" type="video/mp4">
-  </video>
-  <div class="video-break-overlay"><div class="vb-text">EL SONIDO<em>NO MIENTE.</em></div></div>
-</div>
-
-
-<!-- BEATS -->
-<section id="beats">
-  <div class="sec-label">Beatstars</div>
-  <h2 class="sec-title reveal">BEATS<br>LISTOS.</h2>
-  <div class="beats-inner reveal">
-    <div class="beats-video-bg">
-      <video autoplay muted loop playsinline>
-        <source src="assets/videos/ef62be2457.mp4" type="video/mp4">
-      </video>
+  <div class="duo-cta-cols">
+    <!-- TIENDA (verde) -->
+    <div class="duo-col duo-col-shop reveal">
+      <div class="duo-col-glow duo-col-glow-shop"></div>
+      <div class="duo-col-tag">
+        <span class="duo-col-dot duo-col-dot-shop"></span>
+        Tienda
+      </div>
+      <h3 class="duo-col-h">DEJA DE SONAR<br><span class="duo-col-em duo-col-em-shop">A DEMO.</span></h3>
+      <p class="duo-col-p">Las técnicas, packs de sonidos y formación que uso yo. Listos para descargar.</p>
+      <a href="https://shop.sawiprods.com" target="_blank" rel="noopener" class="duo-btn duo-btn-shop">
+        <span class="duo-btn-glow"></span>
+        <span class="duo-btn-text">Acceder a la tienda</span>
+        <span class="duo-btn-arrow">→</span>
+      </a>
+      <div class="duo-col-perks">Ebooks · Packs · Cursos · Presets</div>
     </div>
-    <div class="beats-content">
-      <div class="beats-left">
-        <h3>TU PRÓXIMO<br>HIT EMPIEZA<br>AQUÍ.</h3>
-        <p>Beats exclusivos y no exclusivos en Beatstars. Si buscas algo custom hecho a medida, hablamos.</p>
-        <a href="https://sawiprods.beatstars.com/" target="_blank" rel="noopener" class="btn-beats"><span>Ver catálogo completo →</span></a>
+
+    <!-- SEPARADOR -->
+    <div class="duo-cta-sep"><span></span></div>
+
+    <!-- BEATS (rojo) -->
+    <div class="duo-col duo-col-beats reveal">
+      <div class="duo-col-glow duo-col-glow-beats"></div>
+      <div class="duo-col-tag">
+        <span class="duo-col-dot duo-col-dot-beats"></span>
+        Beats listos
       </div>
-      <div class="beats-genres">
-        <div class="b-genre"><span class="b-genre-name">TRAP</span><span class="b-genre-sub">Dark · Hard</span></div>
-        <div class="b-genre"><span class="b-genre-name">POP</span><span class="b-genre-sub">Commercial</span></div>
-        <div class="b-genre"><span class="b-genre-name">R&amp;B</span><span class="b-genre-sub">Soul · Smooth</span></div>
-        <div class="b-genre"><span class="b-genre-name">RGT</span><span class="b-genre-sub">Reggaetón</span></div>
-        <div class="b-genre"><span class="b-genre-name">INDIE</span><span class="b-genre-sub">Alt Pop</span></div>
-        <div class="b-genre"><span class="b-genre-name">DET</span><span class="b-genre-sub">Detroit</span></div>
-      </div>
+      <h3 class="duo-col-h">TU PRÓXIMO<br><span class="duo-col-em duo-col-em-beats">HIT.</span></h3>
+      <p class="duo-col-p">Beats exclusivos y no exclusivos en Beatstars. ¿Buscas algo a medida? Habla conmigo.</p>
+      <a href="https://sawiprods.beatstars.com/" target="_blank" rel="noopener" class="duo-btn duo-btn-beats">
+        <span class="duo-btn-glow"></span>
+        <span class="duo-btn-text">Ver catálogo en Beatstars</span>
+        <span class="duo-btn-arrow">→</span>
+      </a>
+      <div class="duo-col-perks">Trap · Pop · R&amp;B · Reggaetón · Indie · Detroit</div>
     </div>
   </div>
 </section>
@@ -515,7 +557,7 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
       <div class="sec-label">Servicios profesionales</div>
       <h2 class="sec-title">TRABAJEMOS<br>JUNTOS.</h2>
     </div>
-    <p class="srv-subtext">Pasa el cursor por cada servicio para ver todo lo que incluye. Sin letra pequeña.</p>
+    <p class="srv-subtext">Toca (móvil) o pasa el cursor (escritorio) sobre cada servicio para ver todo lo que incluye. Sin letra pequeña.</p>
   </div>
   <div class="srv-grid">
 
@@ -524,9 +566,8 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
       <div class="srv-front">
         <div class="srv-name">MIXING +<br>MASTERING</div>
         <p class="srv-desc">Tu canción al nivel de streaming. Mezcla profesional y masterización lista para distribuir.</p>
-        <div class="srv-price">Consultar</div>
-        <div class="srv-note">Presupuesto personalizado</div>
         <div class="srv-hint">Pasa el cursor para ver qué incluye</div>
+        <div class="srv-hint-mob">Toca para ver detalles</div>
       </div>
       <div class="srv-back">
         <div class="srv-back-title">QUÉ INCLUYE</div>
@@ -549,9 +590,8 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
       <div class="srv-front">
         <div class="srv-name">FULL<br>PRODUCCIÓN</div>
         <p class="srv-desc">De la idea al master. Beat, arreglos, mezcla y mastering. Resultado listo para distribuir.</p>
-        <div class="srv-price">Consultar</div>
-        <div class="srv-note">Presupuesto personalizado</div>
         <div class="srv-hint">Pasa el cursor para ver qué incluye</div>
+        <div class="srv-hint-mob">Toca para ver detalles</div>
       </div>
       <div class="srv-back">
         <div class="srv-back-title">QUÉ INCLUYE</div>
@@ -576,9 +616,8 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
       <div class="srv-front">
         <div class="srv-name">CUSTOM<br>BEAT</div>
         <p class="srv-desc">Beat hecho exclusivamente para tu proyecto. Con o sin licencia exclusiva.</p>
-        <div class="srv-price">Consultar</div>
-        <div class="srv-note">Sin / con licencia exclusiva</div>
         <div class="srv-hint">Pasa el cursor para ver qué incluye</div>
+        <div class="srv-hint-mob">Toca para ver detalles</div>
       </div>
       <div class="srv-back">
         <div class="srv-back-title">QUÉ INCLUYE</div>
@@ -754,7 +793,7 @@ footer{padding:3.2rem 4rem;border-top:1px solid var(--border);background:var(--o
 <footer>
   <div class="f-brand"><div class="f-brand-name">SAW<em>I</em></div><p>Productor musical en España. Sonido de industria para artistas que van en serio.</p></div>
   <div class="f-links"><h4>Navegación</h4><ul>
-    <li><a href="#beats">Beats</a></li><li><a href="#servicios">Servicios</a></li>
+    <li><a href="#servicios">Servicios</a></li>
     <li><a href="#testimonios">Testimonios</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul></div>
@@ -979,6 +1018,15 @@ document.querySelectorAll('video[autoplay]').forEach(v=>v.play().catch(()=>{}));
   window.ckAccept=function(){localStorage.setItem(KEY,'accepted');banner.classList.remove('show');};
   window.ckReject=function(){localStorage.setItem(KEY,'rejected');banner.classList.remove('show');};
 })();
+
+// Servicios: click toggle (movil + desktop)
+document.querySelectorAll('.srv-card').forEach(card=>{
+  card.addEventListener('click',e=>{
+    // No togglear si pulsan un enlace dentro
+    if(e.target.closest('a')) return;
+    card.classList.toggle('is-open');
+  });
+});
 </script>
 
 <div class="ck-banner" id="ckBanner" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
